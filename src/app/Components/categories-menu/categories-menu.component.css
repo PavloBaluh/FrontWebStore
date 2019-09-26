@@ -1,0 +1,30 @@
+*{
+  outline: none;
+}
+.content{
+  margin-right: 5%;
+  width: 170px;
+  height: 200px;
+}
+
+.text{
+  font-size: 18px;
+  text-align: center;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+img{
+  cursor: pointer;
+  border-right: 25px white solid;
+  border-left: 25px white solid;
+}
+img:hover{
+
+  border-right: 25px gray solid;
+  border-left: 25px gray solid;
+  transition: 1.5s;
+}
+

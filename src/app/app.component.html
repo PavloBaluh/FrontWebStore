@@ -1,20 +1,59 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<header class="header">
+  <div class="container">
+    <div class="inner-header">
+
+      <div class="logo"><b>Tasty</b>Shop</div>
+
+      <div *ngIf="isAnonimUser" class="log-sign">
+        <div class="login">
+          <img class="log-img" src="../assets/Icons/login%20(1).png">
+          <h6 routerLink="/login">Login</h6>
+        </div>
+        <div class="login">
+          <img class="log-img" src="../assets/Icons/house-key.png">
+          <h6 routerLink="/register">Sign-up</h6>
+        </div>
+      </div>
+      <div *ngIf="isAuthenticated" class="user">
+          <img class="icon" src="../assets/Icons/like.png">
+          <img class="icon" src="../assets/Icons/shopping-cart.png">
+          <img class="user-icon" [src]="user.picture != null? user.picture:'../assets/Users/man_user.png'">
+        <div class="text">{{user.username}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="header-2">
+    <div class="promo">everything you want</div>
+    <div class="such-selection">
+      <input type="text">
+      <button></button>
+    </div>
+  </div>
+  <div class="header-3">
+    <nav class="nav">
+      <a class="nav__link" style="padding-top: 15px;" routerLink="/">Home</a>
+      <ul class="nav__link unselectable">
+        <li *ngFor="let e of menuElements" #elem (dblclick)="navigateToMenu(e.name)"
+            (click)="showList(elem,down)">{{e.name}}&nbsp;&nbsp;&nbsp;
+          <div #down class="dropdown">
+            <div [routerLink]="'/menu/' + sub.name" *ngFor="let sub of e.subCategories"
+                 class="element right-arrow">{{sub.name}}
+              <div class="dropleft">
+                <div (click)="showGoods(elem,group.name,$event,down)" *ngFor="let group of sub.groups"
+                     class="element">{{group.name}}</div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="main-selection">
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="footer"></div>
 

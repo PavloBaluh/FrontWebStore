@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <aside class="aside">
+    <div class="aside-header">Hierarchy</div>
+    <div class="aside-content">
+      <div class="hierarchy">
+        <p class="h-hover" [routerLink]="'/menu/' + hierarchy[2]">< {{hierarchy[2]}}</p>
+        <p class="h-hover" [routerLink]="'/menu/' + hierarchy[1]">< {{hierarchy[1]}}</p>
+        <p style="cursor: default; font-weight: 600">{{hierarchy[0]}}</p>
+      </div>
+    </div>
+    <div class="aside-header">Shop by price</div>
+    <div class="aside-content">
+      <div id="form">
+        <app-jquary-range-slider  (minAndMax)="changeMinAndMaxPrice($event)"></app-jquary-range-slider>
+      </div>
+    </div>
+    <div class="aside-header">Shop by properties</div>
+    <div class="aside-content">
+      <div *ngFor="let property of properties" class="properties-container">
+        <div class="properties">{{property.propertyName}}</div>
+        <ng-container *ngFor="let propertyValue of propertiesValues">
+          <div *ngIf="propertyValue.property.propertyName === property.propertyName" class="propertiesValue">
+            <label>
+              <input #input  type="checkbox">
+              <span (click)="selectPropertyValue(propertyValue, input)"></span>
+            </label>
+            <div class="text">{{getPropertiesValue(property, propertyValue)}}</div>
+          </div>
+        </ng-container>
+    </div>
+    </div>
+  </aside>
+  <div class="shop-selection">
+    <div class="sort-selection">
+      <p>Sort by</p>
+      <div #select (click)="showDropDown(select,dropdown)" class="select">
+        {{sortBy}}
+        <div #dropdown class="dropdown">
+          <div (click)="changeSortBy($event,dropdown)" class="drop-down-elem">rate</div>
+          <div (click)="changeSortBy($event,dropdown)" class="drop-down-elem">title</div>
+          <div (click)="changeSortBy($event,dropdown)" class="drop-down-elem">data</div>
+          <div (click)="changeSortBy($event,dropdown)" class="drop-down-elem">price</div>
+        </div>
+      </div>
+
+      <p>Sort direction</p>
+      <div #select1 (click)="showDropDown(select1,dropdown1)" class="select">
+        {{sortDirection}}
+        <div #dropdown1 class="dropdown">
+          <div (click)="changeSortDirection($event,dropdown1,$event)" class="drop-down-elem">asc</div>
+          <div (click)="changeSortDirection($event,dropdown1)" class="drop-down-elem">desc</div>
+        </div>
+      </div>
+
+      <p>Show</p>
+      <div #select2 (click)="showDropDown(select2,dropdown2)" class="select">
+        {{limit}}
+        <div #dropdown2 class="dropdown">
+          <div (click)="changeSortLimit($event,dropdown2 )" class="drop-down-elem">4</div>
+          <div (click)="changeSortLimit($event,dropdown2)" class="drop-down-elem">12</div>
+          <div (click)="changeSortLimit($event,dropdown2)" class="drop-down-elem">25</div>
+          <div (click)="changeSortLimit($event,dropdown2)" class="drop-down-elem">36</div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 100%">
+    <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+
+<div class="wrapper">
+<aside class="aside">
+  <div class="aside-header">{{header}}</div>
+  <div class="aside-content">
+    <p (click)="selectElem(e)" *ngFor="let e of elementsToShowAsside" [ngStyle]="{color: e.name === highlightedElement ?'rgb(86, 195, 228)': 'black'}">{{e.name}}</p>
+  </div>
+</aside>
+<div class="selection">
+<app-categories-menu [elementsToShowMain]="elementsToShowMain"></app-categories-menu>
+</div>
+</div>
