@@ -12,6 +12,7 @@
   text-align: center;
 }
 .container{
+  padding-top: 200px;
   display: flex;
   flex-direction: row;
 }

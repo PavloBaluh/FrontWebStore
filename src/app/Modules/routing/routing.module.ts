@@ -8,10 +8,14 @@ import {GoodsItemsComponent} from '../../Components/goods-items/goods-items.comp
 import {LoginComponent} from '../user/Components/login/login.component';
 import {RegisterComponent} from '../user/Components/register/register.component';
 import * as path from 'path';
+import {ConfirmRegistrationComponent} from '../user/Components/confirm-registration/confirm-registration.component';
+import {UserMenuComponent} from '../user/Components/user-menu/user-menu.component';
+import {UserInfoComponent} from '../user/Components/user-info/user-info-component';
 
 
 const routers: Routes = [
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'menu/:element', component: ItemsComponent},
   {
     path: ':name/goods', component: GoodsComponent,
@@ -19,7 +23,8 @@ const routers: Routes = [
   },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'confirmedRegistration/:username', component: RegisterComponent}
+  {path: 'confirmedRegistration/:username', component: ConfirmRegistrationComponent},
+  {path: 'userMenu', component: UserMenuComponent, children: [{path: 'userInfo', component: UserInfoComponent}]}
 ];
 
 @NgModule({

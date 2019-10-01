@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('alert', {static: true}) alert: ElementRef;
   currentInput: HTMLInputElement;
   massage: string;
+  isError = true;
 
 
   @HostListener('document:click', ['$event.target'])
@@ -46,9 +47,11 @@ export class RegisterComponent implements OnInit {
         if (res === false) {
           this.alert.nativeElement.style.backgroundColor = 'orangered';
           this.massage = 'Username or Email is already taken';
+          this.isError = true;
           this.alert.nativeElement.style.display = 'block';
         } else {
           this.massage = 'Check your email to activate account';
+          this.isError = false;
           this.alert.nativeElement.style.backgroundColor = 'green';
           this.alert.nativeElement.style.display = 'block';
         }
@@ -56,6 +59,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.alert.nativeElement.style.backgroundColor = 'orangered';
       this.massage = 'Invalid data';
+      this.isError = true;
       this.alert.nativeElement.style.display = 'block';
     }
   }

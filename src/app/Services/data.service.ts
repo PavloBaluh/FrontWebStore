@@ -13,5 +13,7 @@ export class DataService {
   CurrentGroup = new Subject();
   MinMaxPrice = new Subject();
   UserAucentication = new Subject();
+  BasketChanel = new Subject();
+  ProductChanel = new Subject();
 
 }

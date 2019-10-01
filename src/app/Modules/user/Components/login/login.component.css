@@ -1,4 +1,5 @@
 .container {
+  padding-top: 200px;
   width: 34%;
   margin: 0 auto;
 }
@@ -88,6 +89,7 @@ p{
 .button:hover{
   border-color:  green;
   transition: 2s;
+  background-color: snow;
 }
 .options{
   width: 100%;

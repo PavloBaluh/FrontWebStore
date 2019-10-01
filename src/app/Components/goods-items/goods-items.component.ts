@@ -40,4 +40,12 @@ export class GoodsItemsComponent implements OnInit {
     });
   }
 
+  addToCard(el: Product, modalLogin: HTMLDivElement, modalBuy: HTMLDivElement) {
+    this.dataService.ProductChanel.next(el);
+    if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
+      modalBuy.style.display = 'block';
+    } else {
+      modalLogin.style.display = 'block';
+    }
+  }
 }
