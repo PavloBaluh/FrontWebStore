@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header unselectable">
   <div class="container">
     <div class="inner-header">
 
@@ -38,12 +38,12 @@
                 <div style="font-size: 11px;color: #888888">{{'Quantity:' + cartItem.quantity}}</div>
               </div>
             </div>
-            <div (click)="viewCard()" class="view">View all carts</div>
+            <div (click)="showCart($event)" class="view">View all carts</div>
           </div>
         </div>
-        <div (click)="toUserMenu()" class="profile">
-          <img class="user-icon" [src]="user.picture != null? user.picture:'../assets/Users/man_user.png'">
-          <div class="text">{{user.username}}</div>
+        <div routerLink="userMenu/userInfo" class="profile">
+          <img class="user-icon" [src]="user.personalData.picture === null?'../assets/Users/man_user.png':'../assets/Users/' + user.personalData.picture">
+          <div style="font-weight: 600" class="text">{{user.username}}</div>
         </div>
       </div>
     </div>
@@ -80,5 +80,5 @@
     <router-outlet></router-outlet>
   </main>
 </div>
-<div *ngIf="router.url !='/userMenu'" class="footer"></div>
+<div *ngIf="!router.url.startsWith('/userMenu')" class="footer"></div>
 

@@ -11,6 +11,8 @@ import * as path from 'path';
 import {ConfirmRegistrationComponent} from '../user/Components/confirm-registration/confirm-registration.component';
 import {UserMenuComponent} from '../user/Components/user-menu/user-menu.component';
 import {UserInfoComponent} from '../user/Components/user-info/user-info-component';
+import {BasketComponent} from '../user/Components/basket/basket.component';
+import {WishesComponent} from '../user/Components/wishes/wishes.component';
 
 
 const routers: Routes = [
@@ -24,7 +26,15 @@ const routers: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'confirmedRegistration/:username', component: ConfirmRegistrationComponent},
-  {path: 'userMenu', component: UserMenuComponent, children: [{path: 'userInfo', component: UserInfoComponent}]}
+  {
+    path: 'userMenu',
+    component: UserMenuComponent,
+    children: [
+      {path: 'userInfo', component: UserInfoComponent},
+      {path: 'cart', component: BasketComponent},
+      {path: 'wishes', component: WishesComponent}
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,80 @@
+<div *ngIf="isPersonalDataPresent" class="wrapper">
+  <div id="img-container" class="user-icon">
+    <img #img [src]=" formObj.personalData.picture !== '' && formObj.personalData.picture !== null? '../../assets/Users/' + formObj.personalData.picture:'../../assets/Users/man_user.png'">
+    <label  class="animate" >change image
+      <input (change)="uploadFile($event.target.files, img)"  style="display: none" type="file">
+    </label>
+  </div>
+  <div *ngIf="isEditProfile" class="user-data">
+    <form #form="ngForm">
+      <div class="form-entry">
+        <label>Name<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.name" type="text"  name="name">
+
+      </div>
+      <div class="form-entry">
+        <label>Surname<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.surname" type="text" name="surname">
+      </div>
+      <div class="form-entry">
+        <label>Phone number<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.phoneNumber" type="text" name="phoneNumber">
+      </div>
+      <div class="form-entry">
+        <label>Country<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.address.country" type="text" name="country">
+      </div>
+      <div class="form-entry">
+        <label>Region</label>
+        <input [(ngModel)]="formObj.personalData.address.region" type="text" name="region">
+      </div>
+      <div class="form-entry">
+        <label>City<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.address.city" type="text" name="city">
+      </div>
+      <div class="form-entry">
+        <label>Street<b>*</b></label>
+        <input [(ngModel)]="formObj.personalData.address.street" type="text" name="street"></div>
+      <div class="form-entry">
+        <label>Number</label>
+        <input [(ngModel)]="formObj.personalData.address.number" type="text" name="number">
+      </div>
+    </form>
+    <div class="buttons">
+    <div (click)="sendData()" class="button">submit</div>
+    <div (click)="isEditProfile = false" class="button">cancel</div>
+    </div>
+  </div>
+  <div *ngIf="!isEditProfile" class="user-Info">
+    <div class="entry">
+    <label class="label">Name:</label>
+      <div class="data">{{formObj.personalData.name}}</div>
+    </div>
+    <div class="entry">
+    <label class="label">Email:</label>
+      <div class="data">{{formObj.email}}</div>
+    </div>
+    <div class="entry">
+    <label class="label">Phone number:</label>
+      <div class="data">{{formObj.personalData.phoneNumber}}</div>
+    </div>
+    <div class="entry">
+    <label class="label">Address:</label>
+      <div class="data">{{
+        formObj.personalData.address.country + ', ' +
+      formObj.personalData.address.region + ', ' +
+      formObj.personalData.address.city +  ', ' +
+      formObj.personalData.address.street + ' street' + ',' +
+      formObj.personalData.address.number}}</div>
+    </div>
+    <div class="buttons02">
+      <div (click)="editProfile()" class="button">edit profile</div>
+      <div class="button">change password</div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isPersonalDataNotPresent" class="no-data">
+  <div class="title-no-data">You did not add any personal data</div>
+  <div class="massage-no-data">Your personal data will be displayed here</div>
+  <div (click)="addData()" class="button-no-data">add data now</div>
+</div>

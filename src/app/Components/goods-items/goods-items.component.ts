@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Product} from '../../Models/Product';
 import {Observable, Subject} from 'rxjs';
 import {DataService} from '../../Services/data.service';
+import {UserService} from '../../Modules/user/Services/user.service';
 
 @Component({
   selector: 'app-goods-items',
@@ -14,7 +15,8 @@ export class GoodsItemsComponent implements OnInit {
   goodsToShow: Product[];
   group = this.router.url.split('/')[1].replace('%20', ' ');
 
-  constructor(private dataService: DataService, private service: MainService, private activatedRoute: ActivatedRoute,
+  constructor(private dataService:
+                DataService, private service: MainService, private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
@@ -25,7 +27,6 @@ export class GoodsItemsComponent implements OnInit {
       } else {
         this.service.getAllSortedGoods(res[0], res[1], res[2], res[3], res[4], this.group, res[5]).subscribe((sortedGoods) => {
           this.goodsToShow = sortedGoods;
-          console.log(this.goodsToShow);
         });
       }
     });

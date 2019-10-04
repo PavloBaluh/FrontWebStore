@@ -21,6 +21,7 @@ export class ItemsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllCategories().subscribe(res => {
+      console.log(res);
       this.menuElements = res;
       this.findCategories();
     });

@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Route, Router} from '@angular/router';
-import {UserService} from '../../../../Services/user.service';
+import {UserService} from '../../Services/user.service';
 
 @Component({
   selector: 'app-register',

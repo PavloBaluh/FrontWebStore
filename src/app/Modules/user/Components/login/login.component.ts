@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {UserService} from '../../../../Services/user.service';
+import {UserService} from '../../Services/user.service';
 import {Router} from '@angular/router';
 import {DataService} from '../../../../Services/data.service';
 

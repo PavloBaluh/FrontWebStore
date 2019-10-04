@@ -21,6 +21,7 @@ h6 {
 }
 
 .container {
+  z-index: 99999999999;
   height: 55px;
   width: 100%;
   margin: 0 auto;
@@ -30,7 +31,7 @@ h6 {
 
 
 .header {
-  z-index: 999999999999;
+  z-index: 999999;
   background-color: rgb(28, 99, 96);
   position: absolute;
   width: 100%;
@@ -242,7 +243,7 @@ li:after {
 .user-icon {
   height: 30px;
   border-radius: 100%;
-  float: left;
+  margin-left: 10px;
 }
 
 .profile {
@@ -354,4 +355,5 @@ li:after {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 12px;
+  outline: none;
 }

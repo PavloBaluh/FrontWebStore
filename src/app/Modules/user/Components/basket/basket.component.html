@@ -1,0 +1,50 @@
+<div *ngIf="isNotEmpty">
+<div class="dish-container section">
+  <div class="order-title-wrap">
+    <div class="container">
+      <div class="row">
+        <div class="order-list-title col-md-12">
+          <p>Product</p>
+          <p>Price</p>
+          <p>Quantity</p>
+          <p>Total</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let entity of products" class="order" >
+    <div class="container">
+      <div class="row row-secound">
+        <div class="order-list col-md-12">
+          <div class="name">
+            <div (click)="deleteFromBasket(entity)" class="cancel">X</div>
+            <img class="logo" [src]="entity.product.picture">
+            <div class="dish-name">
+              <p class="food-name">{{entity.product.title}}</p>
+            </div>
+          </div>
+          <div class="price">
+            <p>{{entity.product.price}}</p>
+          </div>
+          <div class="quantity">
+            <p>{{entity.quantity}}</p>
+          </div>
+          <div class="sum">
+            <p>{{entity.quantity*entity.product.price}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="make-order">
+  <div class="text">Cart total: {{ total}} $</div>
+  <div class="button">proceed to checkout</div>
+</div>
+</div>
+<div *ngIf="isEmpty" class="no-data">
+  <div class="title-no-data">Your cart is empty</div>
+  <div class="massage-no-data">Add something and come back</div>
+  <div (click)="router.navigate(['/'])"  class="button-no-data">Go shopping</div>
+</div>

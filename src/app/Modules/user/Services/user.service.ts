@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../Models/User';
-import {PersonalData} from '../Models/PersonalData';
+import {User} from '../../../Models/User';
+import {PersonalData} from '../../../Models/PersonalData';
 import {hasOwnProperty} from 'tslint/lib/utils';
-import {Basket} from '../Models/Basket';
+import {Basket} from '../../../Models/Basket';
+import {Product} from '../../../Models/Product';
 
 
 @Injectable({
@@ -39,7 +40,6 @@ export class UserService {
   }
 
   addUserInfo(userdata: PersonalData) {
-    console.log(userdata);
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     const params = new FormData();
     params.append('name', userdata.name);
@@ -59,6 +59,17 @@ export class UserService {
   }
 
   addProductInCart(res: Basket) {
-    console.log(res);
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.post(this.apiUrl + 'addProductsToCart', {product: res.product, quantity: res.quantity}, {headers});
+  }
+
+  getAllProductsFromCart(): Observable<Basket[]> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Basket[]>(this.apiUrl + 'getAllProductsFromCart', {headers});
+  }
+
+  deleteFromBasket(product: Product) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.delete(this.apiUrl + 'deleteFromBasket/' + product.id, {headers});
   }
 }

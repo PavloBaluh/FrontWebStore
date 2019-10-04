@@ -11,6 +11,7 @@ import {GoodsItemsComponent} from './Components/goods-items/goods-items.componen
 import { JquaryRangeSliderComponent } from './Components/jquary-range-slider/jquary-range-slider.component';
 import {RoutingModule} from './Modules/routing/routing.module';
 import {UserModule} from './Modules/user/user.module';
+import { BasketComponent } from './Modules/user/Components/basket/basket.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {UserModule} from './Modules/user/user.module';
     GoodsComponent,
     GoodsItemsComponent,
     JquaryRangeSliderComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,

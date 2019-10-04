@@ -1,0 +1,154 @@
+.no-data{
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.wrapper{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.title-no-data{
+  font-family: sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+}
+.massage-no-data{
+  margin-top: 20px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+.button-no-data{
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 17px;
+  margin-top: 25px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid #eaeaea;;
+}
+.button-no-data:hover{
+  transition: 1s;
+  background-color: snow;
+  border-color: rgb(0,128,128);
+  color:rgb(0,128,128) ;
+}
+.user-icon{
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 20px;
+  padding-left: 20px;
+  width: 300px;
+  height: 40%;
+
+}
+
+.user-data{
+  width: 70%;
+}
+img{
+  width: 300px;
+  height: 100%;
+}
+input{
+  width: 70%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  font-size: 14px;
+  font-family: sans-serif;
+  border: 1.5px solid #eaeaea;
+  position: relative;
+}
+
+
+form{
+  padding-right: 5%;
+  padding-left: 10%;
+  margin-top: 20px;
+  display: flex;flex-direction: column;
+}
+
+.user-Info{
+  width: 70%;
+  padding-right: 5%;
+  padding-left: 10%;
+  margin-top: 20px;
+  display: flex;flex-direction: column;
+}
+
+.form-entry{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+b{
+  color: red;
+}
+.buttons{
+  margin-top: 16px;
+  padding-right: 5%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.buttons .button:nth-child(2){
+  margin: 0;
+}
+.button{
+  margin-right: 4%;
+  width: 48%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border: 2px solid #eaeaea;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+.button:hover{
+  transition: 1s;
+  background-color: snow;
+  border-color: rgb(0,128,128);
+  color:rgb(0,128,128) ;
+}
+.entry{
+  font-family: sans-serif;
+  font-size: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+
+}
+.data{
+  margin-left: 10%;
+}
+.label{
+  width: 110px;
+}
+.buttons02{
+  text-transform: uppercase;
+  margin-top: 70px;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.animate{
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  display: none;
+  padding: 10px 5%;
+  width: 90%;
+  background-color: black;
+  position: absolute;
+  bottom: 10px;
+}

@@ -6,11 +6,12 @@ import {SubCategory} from './Models/SubCategory';
 import {Group} from './Models/Group';
 import {MainService} from './Services/main.service';
 import {User} from './Models/User';
-import {UserService} from './Services/user.service';
+import {UserService} from './Modules/user/Services/user.service';
 import {DataService} from './Services/data.service';
 import {Product} from './Models/Product';
 import {Basket} from './Models/Basket';
 import * as $ from 'jquery';
+import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -107,9 +108,18 @@ export class AppComponent implements OnInit {
   }
 
   miniGoods() {
+    this.userService.getAllProductsFromCart().subscribe((products: Basket[]) => {
+      if (products != null) {
+        this.shoppingCard = products.length;
+        if (this.shoppingCard === 1) {
+          this.productsInCart = [products[0]];
+        } else {
+          this.productsInCart = [products[products.length - 1], products[products.length - 2]];
+        }
+      }
+    });
     this.dataService.BasketChanel.subscribe((res: Basket) => {
       if (res !== undefined) {
-        this.userService.addProductInCart(res);
         this.shoppingCard += 1;
         this.productsInCart.push(res);
         if (this.productsInCart.length > 2) {
@@ -117,6 +127,19 @@ export class AppComponent implements OnInit {
         }
         this.showMiniBasket = true;
         this.timeOut();
+      }
+    });
+    this.dataService.AllBasketChanel.subscribe((allBasket: Basket[]) => {
+      if (allBasket === null) {
+        this.productsInCart = [];
+        this.shoppingCard = 0;
+      } else {
+        this.shoppingCard -= 1;
+        if (this.shoppingCard === 1) {
+          this.productsInCart = [allBasket[0]];
+        } else {
+          this.productsInCart = [allBasket[allBasket.length - 1], allBasket[allBasket.length - 2]];
+        }
       }
     });
   }
@@ -127,11 +150,10 @@ export class AppComponent implements OnInit {
     }, 7000);
   }
 
-  toUserMenu() {
-    this.router.navigate(['userMenu/userInfo']);
-  }
 
-  viewCard() {
-
+  showCart(event: Event) {
+    event.stopPropagation();
+    this.router.navigate(['userMenu/cart']);
+    this.showMiniBasket = false;
   }
 }

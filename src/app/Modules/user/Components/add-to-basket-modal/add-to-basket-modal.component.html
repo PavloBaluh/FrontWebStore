@@ -1,0 +1,17 @@
+
+<div class="content unselectable">
+  <div class="pictures">
+    <img [src]="picture">
+  </div>
+  <div class="selection">
+    <div class="title">{{title}}</div>
+    <div class="text">Price for one: $ {{price}}</div>
+    <div class="text">Availability: {{availability > 0 ? 'In stock' : 'Not available'}}</div>
+    <input #inp (change)="changeQuantity($event.target.value)" [value]="quantity"
+           (click)="$event.target.style.borderColor = 'DeepSkyBlue'" type="number" min="1" class="quantity">
+    <div class="total">Total: $ {{total}}</div>
+    <div #button (click)="addToCard(inp)" class="button">Add to card</div>
+  </div>
+</div>
+
+

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {UserService} from '../../Services/user.service';
+import {UserService} from '../../Modules/user/Services/user.service';
 import {cursorTo} from 'readline';
 
 @Component({

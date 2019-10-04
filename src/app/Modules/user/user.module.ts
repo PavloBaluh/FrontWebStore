@@ -8,9 +8,11 @@ import {UserMenuComponent} from './Components/user-menu/user-menu.component';
 import {UserInfoComponent} from './Components/user-info/user-info-component';
 import {RoutingModule} from '../routing/routing.module';
 import {FormsModule} from '@angular/forms';
+import {WishesComponent} from './Components/wishes/wishes.component';
+import {UserService} from './Services/user.service';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent, AddToBasketModalComponent, UserMenuComponent, UserInfoComponent],
+  declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent, AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent],
   imports: [
     FormsModule,
     RoutingModule,
