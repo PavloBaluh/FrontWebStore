@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MainService} from '../../Services/main.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Product} from '../../Models/Product';
@@ -17,7 +17,7 @@ export class GoodsItemsComponent implements OnInit {
 
   constructor(private dataService:
                 DataService, private service: MainService, private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -48,5 +48,13 @@ export class GoodsItemsComponent implements OnInit {
     } else {
       modalLogin.style.display = 'block';
     }
+  }
+
+  addToWishes(el: Product) {
+    this.userService.addProductToWishes(el).subscribe((res) => {
+      if (res === true) {
+        this.dataService.WishesChanel.next(true);
+      }
+    });
   }
 }

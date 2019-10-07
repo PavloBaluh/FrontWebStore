@@ -10,9 +10,12 @@ import {RoutingModule} from '../routing/routing.module';
 import {FormsModule} from '@angular/forms';
 import {WishesComponent} from './Components/wishes/wishes.component';
 import {UserService} from './Services/user.service';
+import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { InvoiceComponent } from './Components/invoice/invoice.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent, AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent],
+  declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent,
+    AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent, CheckoutComponent, InvoiceComponent],
   imports: [
     FormsModule,
     RoutingModule,

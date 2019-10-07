@@ -15,21 +15,23 @@
         <img src="/assets/Icons/shopping-card-white.png" alt="01">
         <div class="text-cart">Add to card</div>
       </div>
-      <img class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
+      <div #img class="img">
+        <img (click)="addToWishes(el)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
+      </div>
       <img class="hoverImg" src="/assets/Icons/weight-balance.png" alt="03">
     </div>
   </div>
 </div>
 <div #modalBuy class="modal-window toBasket">
   <div class="modal-content toBasketContent">
-  <div (click)="modalBuy.style.display = 'none'" class="cross">x</div>
-  <app-add-to-basket-modal (buttonClicked)="modalBuy.style.display = 'none'"></app-add-to-basket-modal>
+    <div (click)="modalBuy.style.display = 'none'" class="cross">x</div>
+    <app-add-to-basket-modal (buttonClicked)="modalBuy.style.display = 'none'"></app-add-to-basket-modal>
   </div>
 </div>
 <div #modalLogin class="modal-window">
   <div class="modal-content">
     <div (click)="modalLogin.style.display = 'none'" class="cross">x</div>
-  <app-login></app-login>
+    <app-login></app-login>
   </div>
 </div>
 

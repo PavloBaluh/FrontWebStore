@@ -6,6 +6,7 @@ import {PersonalData} from '../../../Models/PersonalData';
 import {hasOwnProperty} from 'tslint/lib/utils';
 import {Basket} from '../../../Models/Basket';
 import {Product} from '../../../Models/Product';
+import {Order} from '../../../Models/Order';
 
 
 @Injectable({
@@ -68,8 +69,29 @@ export class UserService {
     return this.http.get<Basket[]>(this.apiUrl + 'getAllProductsFromCart', {headers});
   }
 
+  addProductToWishes(product: Product) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.post(this.apiUrl + 'addProductToWishes', product, {headers});
+  }
+
+  getAllWishes(): Observable<Product[]> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Product[]>(this.apiUrl + 'getAllWishes', {headers});
+  }
+
   deleteFromBasket(product: Product) {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.delete(this.apiUrl + 'deleteFromBasket/' + product.id, {headers});
+  }
+
+  deleteFromWishes(product: Product) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.delete(this.apiUrl + 'deleteFromWishes/' + product.id, {headers});
+  }
+
+  makeOrder(basket: Basket[], user: User, payType: string) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    const order = new Order(basket, 'Value1', false, 'Value1');
+    return this.http.post(this.apiUrl + 'makeOrder', order, {headers});
   }
 }

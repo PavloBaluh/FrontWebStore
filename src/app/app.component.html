@@ -17,9 +17,9 @@
       <div *ngIf="isAuthenticated" class="user">
         <div class="icon-container">
           <img class="icon" src="../assets/Icons/exchange-arrows-black.png">
-          <div class="counter" [textContent]="like"></div>
+          <div class="counter" [textContent]="compare"></div>
         </div>
-        <div class="icon-container">
+        <div routerLink="userMenu/wishes" class="icon-container">
           <img class="icon" src="../assets/Icons/like.png">
           <div class="counter" [textContent]="like"></div>
         </div>

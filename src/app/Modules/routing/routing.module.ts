@@ -13,6 +13,8 @@ import {UserMenuComponent} from '../user/Components/user-menu/user-menu.componen
 import {UserInfoComponent} from '../user/Components/user-info/user-info-component';
 import {BasketComponent} from '../user/Components/basket/basket.component';
 import {WishesComponent} from '../user/Components/wishes/wishes.component';
+import {CheckoutComponent} from '../user/Components/checkout/checkout.component';
+import {InvoiceComponent} from '../user/Components/invoice/invoice.component';
 
 
 const routers: Routes = [
@@ -32,7 +34,9 @@ const routers: Routes = [
     children: [
       {path: 'userInfo', component: UserInfoComponent},
       {path: 'cart', component: BasketComponent},
-      {path: 'wishes', component: WishesComponent}
+      {path: 'wishes', component: WishesComponent},
+      {path: 'checkout', component: CheckoutComponent},
+      {path: 'invoice', component: InvoiceComponent}
     ]
   }
 ];

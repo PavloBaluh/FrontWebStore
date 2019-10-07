@@ -1,12 +1,6 @@
-<div *ngIf="isPersonalDataPresent" class="wrapper">
-  <div id="img-container" class="user-icon">
-    <img #img
-         [src]=" formObj.personalData.picture !== '' && formObj.personalData.picture !== null? '../../assets/Users/' + formObj.personalData.picture:'../../assets/Users/man_user.png'">
-    <label class="animate">change image
-      <input (change)="uploadFile($event.target.files, img)" style="display: none" type="file">
-    </label>
-  </div>
-  <div *ngIf="isEditProfile" class="user-data">
+<div class="container">
+  <div class="form">
+    <div style="margin-left: 10px; margin-top: 10px" class="header">Shipping address</div>
     <form #form="ngForm">
       <div class="form-entry">
         <label style="height: 20px">Name<b>*</b></label>
@@ -66,41 +60,41 @@
         </div>
       </div>
     </form>
-    <div class="buttons">
-      <div (click)="sendData()" class="button">submit</div>
-      <div (click)="isEditProfile = false" class="button">cancel</div>
+  </div>
+  <div class="order">
+    <div class="order-selection">
+      <div class="header">Order-Summary</div>
+      <div class="order-content">
+        <table>
+          <tr>
+            <th width="70%">Product</th>
+            <th width="30%">Total</th>
+          </tr>
+          <tr *ngFor="let pr of product">
+            <td>{{pr.product.title}} <b style="color: black">x{{pr.quantity}}</b></td>
+            <td>{{pr.product.price * pr.quantity}}$</td>
+          </tr>
+          <tr>
+            <td><b style="color: black">Total</b></td>
+            <td>{{total}}$</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="order-selection">
+      <div class="header">Payment-Method</div>
+      <div style="display: flex; flex-direction: column" class="order-content">
+        <div class="toggle">
+        <input #inp class="inp" name="pay" value="Paypal" type="radio" id="cash">
+        <label class="label" for="cash">Cash on Delivery</label>
+        </div>
+        <div class="toggle">
+        <input #inp1 class="inp" checked name="pay" value="Cash" type="radio" id="cart">
+        <label class="label" for="cart">Via Paypal</label>
+        </div>
+        <img style="width: 80%; margin-left: 12px" src="../../assets/Icons/payPal.jpg">
+        <div (click)="placeOrder(inp,inp1)" class="button">Place Order</div>
+      </div>
     </div>
   </div>
-  <div *ngIf="!isEditProfile" class="user-Info">
-    <div class="entry">
-      <label class="label">Name:</label>
-      <div class="data">{{formObj.personalData.name}}</div>
-    </div>
-    <div class="entry">
-      <label class="label">Email:</label>
-      <div class="data">{{formObj.email}}</div>
-    </div>
-    <div class="entry">
-      <label class="label">Phone number:</label>
-      <div class="data">{{formObj.personalData.phoneNumber}}</div>
-    </div>
-    <div class="entry">
-      <label class="label">Address:</label>
-      <div class="data">{{
-        formObj.personalData.address.country + ', ' +
-        formObj.personalData.address.region + ', ' +
-        formObj.personalData.address.city + ', ' +
-        formObj.personalData.address.street + ' street' + ',' +
-        formObj.personalData.address.number}}</div>
-    </div>
-    <div class="buttons02">
-      <div (click)="editProfile()" class="button">edit profile</div>
-      <div class="button">change password</div>
-    </div>
-  </div>
-</div>
-<div *ngIf="isPersonalDataNotPresent" class="no-data">
-  <div class="title-no-data">You did not add any personal data</div>
-  <div class="massage-no-data">Your personal data will be displayed here</div>
-  <div (click)="addData()" class="button-no-data">add data now</div>
 </div>

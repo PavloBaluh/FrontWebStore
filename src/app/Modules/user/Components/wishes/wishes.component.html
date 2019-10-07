@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="isDataPresent" class="container">
   <div class="content" *ngFor="let el of goodsToShow">
     <div *ngIf="el.availableNumber>0" class="block"><p>Sale</p></div>
     <div style="background-color: rgb(255, 69, 0); width: 150px" *ngIf="el.availableNumber == 0" class="block"><p>Not
@@ -14,6 +14,11 @@
         <img src="/assets/Icons/shopping-card-white.png" alt="01">
         <div class="text-cart">Move to cart</div>
     </div>
-    <div class="cross">X</div>
+    <div (click)="deleteFromWishes(el)" class="cross">X</div>
   </div>
+</div>
+<div *ngIf="isDataNotPresent" class="no-data">
+  <div class="title-no-data">Your wishes are empty</div>
+  <div class="massage-no-data">Add something and come back</div>
+  <div routerLink="/" class="button-no-data">add wishes now</div>
 </div>

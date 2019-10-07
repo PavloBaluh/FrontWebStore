@@ -57,4 +57,9 @@ export class BasketComponent implements OnInit {
       this.dataService.AllBasketChanel.next(res);
     });
   }
+
+  makeOrder() {
+    this.router.navigate(['/userMenu/checkout']);
+  }
 }
+

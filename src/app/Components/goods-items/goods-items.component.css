@@ -139,3 +139,10 @@ p {
   cursor: pointer;
   outline: none;
 }
+.img{
+  height: 44px;
+  width: 44px;
+}
+.img:active{
+  background-color: rgb(0,128,128);;
+}

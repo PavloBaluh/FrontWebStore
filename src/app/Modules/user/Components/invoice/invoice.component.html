@@ -1,0 +1,28 @@
+ <div class="container">
+  <div class="header">
+    <img src="../../assets/Icons/icon.jpg">
+    <div class="name"><b>Tasty</b>Shop</div>
+    <div class="time">Date: {{date|date:'medium'}}</div>
+  </div>
+  <div class="body">
+    <div class="user-info">
+      <div class="user-info-content">
+        <p>From</p>
+        <p>TastyShop, Inc.</p>
+        <p>15 Romana Srt</p>
+        <p>Lviv Ukraine</p>
+        <p>Phone: (123) 122-1233</p>
+        <p>Email: support@gmail.com</p>
+      </div>
+      <div class="user-info-content">
+        <p>To</p>
+        <p>{{user.personalData.name + ' ' + user.personalData.surname}}</p>
+        <p>{{user.personalData.phoneNumber}}</p>
+        <p>{{user.email}}</p>
+      </div>
+      <div class="user-info-content">
+        <p>invoice</p>
+      </div>
+    </div>
+  </div>
+</div>

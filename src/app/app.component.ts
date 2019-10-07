@@ -12,6 +12,7 @@ import {Product} from './Models/Product';
 import {Basket} from './Models/Basket';
 import * as $ from 'jquery';
 import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
+import {templateJitUrl} from '@angular/compiler';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
   user: User = null;
   isAuthenticated = false;
   isAnonimUser = false;
+  compare = 0;
   like = 0;
   shoppingCard = 0;
   productsInCart: Basket[] = [];
@@ -104,7 +106,21 @@ export class AppComponent implements OnInit {
       });
     });
     this.miniGoods();
+    this.wishes();
+  }
 
+  wishes() {
+    this.userService.getAllWishes().subscribe((res) => {
+      this.like = res.length;
+    });
+    this.dataService.WishesChanel.subscribe((res) => {
+      if (res === true) {
+        this.like += 1;
+      }
+      if (res === false) {
+        this.like -= 1;
+      }
+    });
   }
 
   miniGoods() {
