@@ -89,9 +89,22 @@ export class UserService {
     return this.http.delete(this.apiUrl + 'deleteFromWishes/' + product.id, {headers});
   }
 
-  makeOrder(basket: Basket[], user: User, payType: string) {
+  makeOrder(basket: Basket[], user: User, payType: string): Observable<Order> {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    const order = new Order(basket, 'Value1', false, 'Value1');
-    return this.http.post(this.apiUrl + 'makeOrder', order, {headers});
+    const order = new Order(null, basket, 'checking', false, payType, null);
+    return this.http.post<Order>(this.apiUrl + 'makeOrder', order, {headers});
+  }
+
+  getAllUserOrders(): Observable<Order[]> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Order[]>(this.apiUrl + 'getAllOrders', {headers});
+  }
+
+  changePassword(oldPas, newPas) {
+    const params = new FormData();
+    params.append('oldPassword', oldPas);
+    params.append('newPassword', newPas);
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.post(this.apiUrl + 'changePassword', params, {headers});
   }
 }

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="inner-header">
 
-      <div class="logo"><b>Tasty</b>Shop</div>
+      <div (click)="router.navigate(['/'])" class="logo"><b>Tasty</b>Shop</div>
 
       <div *ngIf="isAnonimUser" class="log-sign">
         <div class="login">
@@ -30,7 +30,7 @@
           <div *ngIf="showMiniBasket" class="basket-add">
             <div class="basket-count">You have {{shoppingCard}} goods in cart</div>
             <div class="product" *ngFor="let cartItem of productsInCart">
-              <img class="picture-cart" [src]="cartItem.product.picture">
+              <img class="picture-cart" [src]="'../../assets/Goods/' + cartItem.product.picture">
               <div class="item-info">
                 <div style="font-size: 14px;">{{cartItem.product.title}}</div>
                 <div
@@ -51,8 +51,19 @@
   <div *ngIf="!router.url.startsWith('/userMenu')" class="header-2">
     <div class="promo">everything you want</div>
     <div class="such-selection">
-      <input type="text">
-      <button></button>
+      <input #suchInp (click)="such(dropdown1, suchInp)" id="such" type="text">
+      <div class="such-button">
+        <img style="width: 15px; height: 25px; padding-top: 5px; padding-bottom: 5px" src="../assets/Icons/searching-magnifying-glass.png">
+      </div>
+      <div #dropdown1  class="dropdown1">
+        <div *ngFor="let p of suchProducts" class="such-product">
+          <img style=" width:40px; height: 30px; margin-left: 10px" [src]="'../assets/Goods/' + p.picture">
+          <div routerLink="/" class="such-title">{{p.title}}</div>
+        </div>
+        <div *ngIf="suchProducts.length == 0" class="no-elem">
+          <p>No matches</p>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="!router.url.startsWith('/userMenu')" class="header-3">

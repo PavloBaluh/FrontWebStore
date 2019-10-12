@@ -4,7 +4,7 @@ export class Product {
   constructor(
     public id: number = 0,
     public title: string = '',
-    public descriprion: string = '',
+    public description: string = '',
     public availableNumber: number = 0,
     public warrantyMonths: number = 0,
     public picture: string = '',

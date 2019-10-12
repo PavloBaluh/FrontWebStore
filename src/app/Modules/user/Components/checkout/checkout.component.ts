@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit {
       new PersonalAddress('', '', '', '', ''))
   };
 
-  constructor(private service: UserService, private router: Router) {
+  constructor(private service: UserService, private router: Router, private dataService: DataService) {
   }
 
   ngOnInit() {
@@ -42,17 +42,22 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder(inp: HTMLInputElement, inp1: HTMLInputElement) {
+    let checked = '';
     if (inp.checked) {
-      // @ts-ignore
-      this.service.makeOrder(this.product, this.formObj, inp.value).subscribe((res) => {
-        this.router.navigate(['userMenu/invoice'], {queryParams: {pay: 'cash', form: JSON.stringify(this.formObj)}});
-      });
+      checked = 'cash';
+    } else {
+      checked = 'payPal';
     }
-    if (inp1.checked) {
-      // @ts-ignore
-      this.service.makeOrder(this.product, this.formObj, inp1.value).subscribe((res) => {
-        this.router.navigate(['userMenu/invoice'], {queryParams: {pay: 'payPal', form: JSON.stringify(this.formObj)}});
+    // @ts-ignore
+    this.service.makeOrder(this.product, this.formObj, inp1.value).subscribe((order) => {
+      this.dataService.AllBasketChanel.next(null);
+      this.router.navigate(['userMenu/invoice'], {
+        queryParams: {
+          pay: checked,
+          form: JSON.stringify(this.formObj),
+          order: JSON.stringify(order)
+        }
       });
-    }
+    });
   }
 }

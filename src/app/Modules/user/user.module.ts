@@ -12,10 +12,13 @@ import {WishesComponent} from './Components/wishes/wishes.component';
 import {UserService} from './Services/user.service';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
+import { PrintComponent } from './Components/print/print.component';
+import { OrderComponent } from './Components/order/order.component';
+import { OrderSumPipe } from './pipes/order-sum.pipe';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent,
-    AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent, CheckoutComponent, InvoiceComponent],
+    AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent, CheckoutComponent, InvoiceComponent, PrintComponent, OrderComponent, OrderSumPipe],
   imports: [
     FormsModule,
     RoutingModule,

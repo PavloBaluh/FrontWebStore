@@ -6,10 +6,10 @@
       <input (change)="uploadFile($event.target.files, img)" style="display: none" type="file">
     </label>
   </div>
-  <div *ngIf="isEditProfile" class="user-data">
+  <div *ngIf="(isEditProfile)" class="user-data">
     <form #form="ngForm">
       <div class="form-entry">
-        <label style="height: 20px">Name<b>*</b></label>
+        <label>Name<b>*</b></label>
         <div class="input-with-picture">
           <img class="input-img" src="../../assets/Icons/user-silhouette.png">
           <input [(ngModel)]="formObj.personalData.name" type="text" name="name">
@@ -71,7 +71,33 @@
       <div (click)="isEditProfile = false" class="button">cancel</div>
     </div>
   </div>
-  <div *ngIf="!isEditProfile" class="user-Info">
+
+
+  <div *ngIf="isChangePassword"  class="changePassword">
+  <form style="margin-bottom: 85px" #form2="ngForm">
+    <div #alert class="alert"><b style="color: white">Error! </b>{{alertMassage}}<div (click)="alert.style.display = 'none'" class="cross">x</div></div>
+    <div class="form-entry">
+      <label  style="width: 30%">Old password<b>*</b></label>
+        <input #oldPas type="password" name="name">
+    </div>
+    <div class="form-entry">
+      <label style="width: 30%">New Password<b>*</b></label>
+        <input #pas type="password" name="surname">
+    </div>
+    <div class="form-entry">
+      <label style="width: 30%">Password confirmation<b>*</b></label>
+        <input #pas2 type="password" name="phoneNumber">
+    </div>
+    </form>
+    <div class="buttons">
+      <div (click)="changePassword(oldPas.value,pas.value,pas2.value,alert)" class="button">submit</div>
+      <div (click)="isChangePassword = false" class="button">cancel</div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="(!isEditProfile) && (!isChangePassword)" class="user-Info">
     <div class="entry">
       <label class="label">Name:</label>
       <div class="data">{{formObj.personalData.name}}</div>
@@ -95,7 +121,7 @@
     </div>
     <div class="buttons02">
       <div (click)="editProfile()" class="button">edit profile</div>
-      <div class="button">change password</div>
+      <div (click)="isChangePassword = true;" class="button">change password</div>
     </div>
   </div>
 </div>

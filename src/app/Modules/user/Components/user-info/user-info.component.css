@@ -168,3 +168,29 @@ b{
   align-items: center;
   width: 75%;
 }
+.changePassword{
+  width: 70%;
+}
+.alert {
+  display: none;
+  position: relative;
+  width: 100%;
+  background-color: orangered;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5)
+}
+.cross{
+  position: absolute;
+  right: 15px;
+  top: 30%;
+  border-bottom: 1px solid;
+  color: black;
+  cursor: pointer;
+  outline: none;
+}

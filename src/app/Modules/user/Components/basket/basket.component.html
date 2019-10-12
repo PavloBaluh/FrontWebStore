@@ -18,7 +18,7 @@
           <div class="order-list col-md-12">
             <div class="name">
               <div (click)="deleteFromBasket(entity)" class="cancel">X</div>
-              <img class="logo" [src]="entity.product.picture">
+              <img class="logo" [src]="'../../assets/Goods/' + entity.product.picture">
               <div class="dish-name">
                 <p class="food-name">{{entity.product.title}}</p>
               </div>

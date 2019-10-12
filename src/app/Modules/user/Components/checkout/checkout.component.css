@@ -41,6 +41,8 @@ img{
   height: 100%;
 }
 input{
+  pointer-events: none;
+  color: gray;
   box-sizing: border-box;
   height: 30px;
   width: 96%;

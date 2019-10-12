@@ -15,6 +15,8 @@ import {BasketComponent} from '../user/Components/basket/basket.component';
 import {WishesComponent} from '../user/Components/wishes/wishes.component';
 import {CheckoutComponent} from '../user/Components/checkout/checkout.component';
 import {InvoiceComponent} from '../user/Components/invoice/invoice.component';
+import {PrintComponent} from '../user/Components/print/print.component';
+import {OrderComponent} from '../user/Components/order/order.component';
 
 
 const routers: Routes = [
@@ -36,7 +38,9 @@ const routers: Routes = [
       {path: 'cart', component: BasketComponent},
       {path: 'wishes', component: WishesComponent},
       {path: 'checkout', component: CheckoutComponent},
-      {path: 'invoice', component: InvoiceComponent}
+      {path: 'invoice', component: InvoiceComponent},
+      {path: 'print', component: PrintComponent},
+      {path: 'orders', component: OrderComponent}
     ]
   }
 ];

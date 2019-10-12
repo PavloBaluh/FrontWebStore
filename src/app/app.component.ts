@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   @ViewChild('header3', {static: true}) header3: ElementRef;
 
   menuElements: Category[] = [];
+  suchProducts: Product[] = [];
   elem = null;
   down = null;
   user: User = null;
@@ -37,6 +38,8 @@ export class AppComponent implements OnInit {
   shoppingCard = 0;
   productsInCart: Basket[] = [];
   showMiniBasket = false;
+  dropdown1: HTMLDivElement;
+  suchInp: HTMLDivElement;
 
   constructor(private service: MainService, private userService: UserService, private dataService: DataService, private router: Router) {
     this.service.getAllCategories().subscribe((res) => {
@@ -50,6 +53,9 @@ export class AppComponent implements OnInit {
       this.down.style.display = 'none';
       this.elem.style.color = 'white';
       this.elem.style.backgroundColor = 'rgb(28, 99, 96)';
+    }
+    if ((this.dropdown1 !== undefined) && (trg !== this.dropdown1) && (trg !== this.suchInp)) {
+      this.dropdown1.style.display = 'none';
     }
   }
 
@@ -171,5 +177,23 @@ export class AppComponent implements OnInit {
     event.stopPropagation();
     this.router.navigate(['userMenu/cart']);
     this.showMiniBasket = false;
+  }
+
+  private such(dropdown: HTMLDivElement, suchInp: HTMLDivElement) {
+    this.dropdown1 = dropdown;
+    this.suchInp = suchInp;
+    dropdown.style.display = 'block';
+    $(document).ready(() => {
+      $('#such').keyup(() => {
+        const val = $('#such').val();
+        if (val !== '') {
+          this.service.suchProductsByChars(val).subscribe((res) => {
+            this.suchProducts = res;
+          });
+        } else {
+          this.suchProducts = [];
+        }
+      });
+    });
   }
 }
