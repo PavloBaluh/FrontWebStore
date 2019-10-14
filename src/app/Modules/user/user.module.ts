@@ -9,7 +9,6 @@ import {UserInfoComponent} from './Components/user-info/user-info-component';
 import {RoutingModule} from '../routing/routing.module';
 import {FormsModule} from '@angular/forms';
 import {WishesComponent} from './Components/wishes/wishes.component';
-import {UserService} from './Services/user.service';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { PrintComponent } from './Components/print/print.component';

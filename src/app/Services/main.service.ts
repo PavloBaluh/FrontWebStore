@@ -14,6 +14,10 @@ export class MainService {
   constructor(private http: HttpClient) {
   }
 
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(this.api + '/getProductById/' + id);
+  }
+
 
   getHierarchy(group) {
     return this.http.get(this.api + '/getHierarchy/' + group);

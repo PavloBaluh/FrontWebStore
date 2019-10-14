@@ -61,7 +61,6 @@ export class AddToBasketModalComponent implements OnInit {
       if (isProductReceived) {
         this.service.BasketChanel.next(basketElem);
       }
-     // this.service.BasketChanel.next({cart: basketElem, plusMinus: 'plus'});
     });
   }
 }

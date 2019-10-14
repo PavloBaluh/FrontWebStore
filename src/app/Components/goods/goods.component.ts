@@ -30,7 +30,7 @@ export class GoodsComponent implements OnInit {
   propertiesSort = [];
 
   constructor(private dataService: DataService, private activatedRoute: ActivatedRoute,
-              private service: MainService, private router: Router) {
+              private service: MainService, private router: Router, mainService: MainService) {
   }
 
   ngOnInit() {
@@ -41,15 +41,28 @@ export class GoodsComponent implements OnInit {
       this.limit = 4;
       this.dataService.CurrentGroup.next(this.group);
       this.getHierarchy();
-      this.router.navigate([param.name + '/goods/sort']);
-      this.dataService.MinMaxPrice.subscribe((minMax) => {
-        this.priceFrom = minMax[0];
-        this.priceTo = minMax[1];
-      });
       this.dataService.GoodsChanel.subscribe((res: Product[]) => {
           this.getProperties(res);
         }
       );
+      if (this.activatedRoute.snapshot.queryParamMap.keys.length === 0) {
+        this.router.navigate([param.name + '/goods/sort']);
+        this.dataService.MinMaxPrice.subscribe((minMax) => {
+          this.priceFrom = minMax[0];
+          this.priceTo = minMax[1];
+        });
+      } else {
+        this.activatedRoute.queryParams.subscribe((queryParams) => {
+          if (queryParams[5] !== undefined) {
+            this.propertiesSort = queryParams[5];
+          }
+          this.service.getMinMaxPrice(this.group).subscribe((res) => {
+            this.priceFrom = res[0];
+            this.priceTo = res[1];
+            this.sort();
+          });
+        });
+      }
     });
   }
 
@@ -94,6 +107,7 @@ export class GoodsComponent implements OnInit {
   }
 
   sort() {
+    console.log(this.propertiesSort);
     this.router.navigate([this.group + '/goods/sort'],
       {queryParams: [this.priceFrom, this.priceTo, this.sortBy, this.limit, this.sortDirection, this.propertiesSort]});
   }
@@ -121,6 +135,7 @@ export class GoodsComponent implements OnInit {
         unicProp.push(arr[i].property);
       }
     }
+    console.log(this.propertiesSort);
     this.propertiesValues = unicArr;
     this.properties = unicProp;
   }
@@ -133,6 +148,7 @@ export class GoodsComponent implements OnInit {
   }
 
   selectPropertyValue(propertyValue, input) {
+    console.log(this.propertiesSort);
     if (input.checked === false) {
       this.propertiesSort.push(propertyValue.id);
     } else {

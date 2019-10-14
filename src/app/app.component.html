@@ -42,7 +42,7 @@
           </div>
         </div>
         <div routerLink="userMenu/userInfo" class="profile">
-          <img class="user-icon" [src]="user.personalData.picture === null?'../assets/Users/man_user.png':'../assets/Users/' + user.personalData.picture">
+          <img class="user-icon" [src]="user.personalData.picture == null?'../assets/Users/man_user.png':'../assets/Users/' + user.personalData.picture">
           <div style="font-weight: 600" class="text">{{user.username}}</div>
         </div>
       </div>

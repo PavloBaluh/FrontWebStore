@@ -1,4 +1,6 @@
 import {PropertyValue} from './PropertyValue';
+import {Group} from './Group';
+import {Category} from './Category';
 
 export class Product {
   constructor(
@@ -10,6 +12,7 @@ export class Product {
     public picture: string = '',
     public price: number = 0,
     public rate: number = 0,
+    public group: Group,
     public propertyValues: PropertyValue[] = [],
   ) {
   }

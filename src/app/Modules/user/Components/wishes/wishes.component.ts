@@ -43,4 +43,9 @@ export class WishesComponent implements OnInit {
     });
   }
 
+  moveToBasket(el: Product, modal: HTMLDivElement) {
+    this.dataService.ProductChanel.next(el);
+    modal.style.display = 'block';
+    this.deleteFromWishes(el);
+  }
 }

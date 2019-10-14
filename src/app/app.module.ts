@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ItemsComponent} from './Components/items/items.component';
@@ -12,6 +11,8 @@ import { JquaryRangeSliderComponent } from './Components/jquary-range-slider/jqu
 import {RoutingModule} from './Modules/routing/routing.module';
 import {UserModule} from './Modules/user/user.module';
 import { BasketComponent } from './Modules/user/Components/basket/basket.component';
+import { DescriptionPipe } from './Pipes/description.pipe';
+import {GoodComponent} from './Components/good/good.component';
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { BasketComponent } from './Modules/user/Components/basket/basket.compone
     GoodsItemsComponent,
     JquaryRangeSliderComponent,
     BasketComponent,
+    DescriptionPipe,
+    GoodComponent,
   ],
   imports: [
     BrowserModule,

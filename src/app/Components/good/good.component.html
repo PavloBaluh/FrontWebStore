@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="img">
+    <img [src]="'../assets/Goods/' + product.picture">
+  </div>
+  <div class="info">
+    <div class="header">{{product.title}}</div>
+    <div class="text">Price: $ {{product.price}}</div>
+    <div class="text">Availability:  {{product.availableNumber < 1 ? 'Not available' : 'In Stock'}}</div>
+    <div class="text">Description: {{product.description}}</div>
+    <div class="text">Properties:</div>
+    <div (click)="getByPropValue(prop)" style="margin-left: 20px" class="text"
+         *ngFor=" let prop of product.propertyValues">{{prop.property.propertyName + ': '}}
+      <b style="color:rgb(28, 99, 96);">{{prop.value}}</b></div>
+    <div class="text">Category: <b [routerLink]="'/menu/' +category"
+                                   style="color:rgb(28, 99, 96);padding-right: 20px">{{category}}</b>
+      Subcategory: <b [routerLink]="'/menu/' + subCategory"
+                      style="color:rgb(28, 99, 96);">{{subCategory}}</b></div>
+    <div class="text">Group: <b [routerLink]=" '/' + group + '/goods/sort'" style="color:rgb(28, 99, 96);">{{group}}</b>
+    </div>
+    <div class="buttons">
+      <div (click)="addToCart(modalBuy)" class="button">add to cart</div>
+      <div (click)="addToWishes()" class="button">wishlist</div>
+      <div class="button">compare</div>
+    </div>
+  </div>
+</div>
+<div #modalBuy class="modal-window toBasket">
+  <div class="modal-content toBasketContent">
+    <div (click)="modalBuy.style.display = 'none'" class="crossModal">x</div>
+    <app-add-to-basket-modal (buttonClicked)="modalBuy.style.display = 'none'"></app-add-to-basket-modal>
+  </div>
+</div>

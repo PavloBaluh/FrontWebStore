@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="content" *ngFor="let el of goodsToShow">
+  <div [routerLink]="'/good/' + el.id" class="content" *ngFor="let el of goodsToShow">
     <div *ngIf="el.availableNumber>0" class="block"><p>Sale</p></div>
     <div style="background-color: rgb(255, 69, 0); width: 150px" *ngIf="el.availableNumber == 0" class="block"><p>Not
       Available</p></div>
@@ -16,7 +16,7 @@
         <div class="text-cart">Add to card</div>
       </div>
       <div #img class="img">
-        <img (click)="addToWishes(el)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
+        <img (click)="addToWishes(el,modalLogin)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
       </div>
       <img class="hoverImg" src="/assets/Icons/weight-balance.png" alt="03">
     </div>
@@ -24,9 +24,9 @@
 </div>
 <div *ngIf="pages.length != 0 && pages.length != 1" class="pages">
   <div (click)="changePage('dec')" class="arrow">‹‹</div>
-  <div (click)="changePage(p)"  [style.background-color]="currentPage == p?'rgb(0,128,128)':'white'"
-        [style.color]="currentPage == p?'white':'black'"
-        *ngFor="let p of pages" class="select-page">{{p}}</div>
+  <div (click)="changePage(p)" [style.background-color]="currentPage == p?'rgb(0,128,128)':'white'"
+       [style.color]="currentPage == p?'white':'black'"
+       *ngFor="let p of pages" class="select-page">{{p}}</div>
   <div (click)="changePage('inc')" class="arrow">››</div>
 </div>
 <div #modalBuy class="modal-window toBasket">

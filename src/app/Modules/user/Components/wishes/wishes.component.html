@@ -10,11 +10,17 @@
     <div class="price">
       ${{el.price}}
     </div>
-      <div  class="add">
-        <img src="/assets/Icons/shopping-card-white.png" alt="01">
-        <div class="text-cart">Move to cart</div>
+    <div [style.pointer-events]="el.availableNumber<1?'none':'default'"  class="add">
+      <img src="/assets/Icons/shopping-card-white.png" alt="01">
+      <div (click)="moveToBasket(el,modalBuy)" class="text-cart">Move to cart</div>
     </div>
     <div (click)="deleteFromWishes(el)" class="cross">X</div>
+  </div>
+</div>
+<div #modalBuy class="modal-window toBasket">
+  <div class="modal-content toBasketContent">
+    <div (click)="modalBuy.style.display = 'none'" class="crossModal">x</div>
+    <app-add-to-basket-modal (buttonClicked)="modalBuy.style.display = 'none'"></app-add-to-basket-modal>
   </div>
 </div>
 <div *ngIf="isDataNotPresent" class="no-data">

@@ -1,0 +1,95 @@
+table {
+  width: 80%;
+  margin: 50px auto 0;
+  border: 2px solid #eaeaea;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  border: 2px solid #eaeaea;
+}
+
+td {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 2px solid #eaeaea;
+  font-family: sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  height: 22px;
+}
+
+.status {
+  background-color: forestgreen;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 10px;
+  color: white;
+}
+
+
+.no-data {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.title-no-data {
+  font-family: sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.massage-no-data {
+  margin-top: 20px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+.button-no-data {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 17px;
+  margin-top: 25px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid #eaeaea;;
+}
+
+.button-no-data:hover {
+  transition: 1s;
+  background-color: snow;
+  border-color: rgb(0, 128, 128);
+  color: rgb(0, 128, 128);
+}
+
+img {
+  float: left;
+  height: 100px;
+  width: 130px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.text {
+  margin-top: 50px;
+}
+
+.back-arrow {
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  top: -40px;
+  left: 0;
+
+}

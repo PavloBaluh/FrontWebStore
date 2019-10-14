@@ -41,8 +41,9 @@ export class RegisterComponent implements OnInit {
 
   register(email: string, username: string, password: string, passwordRepeat: string) {
     const regExpEmail = new RegExp('^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$');
-    const regExpUsername = new RegExp('\\w[A-Za-z0-9А-Яа-яёЁЇїІіЄєҐґ]{2,12}');
-    if (regExpEmail.test(email) && regExpUsername.test(username) && regExpUsername.test(password) && password === passwordRepeat) {
+    const regExpUsername = new RegExp('\\w[A-Za-z0-9]{4,12}');
+    const regExpPassword = new RegExp('\\w[A-Za-z0-9]{6,12}');
+    if (email.match(regExpEmail) && regExpUsername.test(username) && regExpPassword.test(password) && password === passwordRepeat) {
       this.service.register(email, username, password).subscribe((res: boolean) => {
         if (res === false) {
           this.alert.nativeElement.style.backgroundColor = 'orangered';

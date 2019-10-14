@@ -1,0 +1,40 @@
+<table *ngIf="!showMore && isOrdersPresent">
+  <tr>
+    <th width="40%">Date</th>
+    <th width="15%">Status</th>
+    <th width="15%">Paid</th>
+    <th width="30%">Order Total</th>
+  </tr>
+  <tr (click)="showMoreProducts(order.orderProducts)" *ngFor="let order of orders">
+    <td>{{order.localDateTime|date:'y-M-d h:m:s'}}</td>
+    <td><i class="status">{{order.orderStatus}}</i></td>
+    <td><i style="background-color: orange" class="status">{{order.payed == false ? 'Not Yet' : 'Paid'}}</i></td>
+    <td>{{order.orderProducts|orderSum}}</td>
+  </tr>
+</table>
+
+<table style="font-family: sans-serif; position: relative" *ngIf="showMore && isOrdersPresent">
+  <tr >
+    <th width="40%">Product</th>
+    <th width="15%">Price</th>
+    <th width="15%">Quantity</th>
+    <th width="30%">Total</th>
+  </tr>
+  <tr *ngFor="let product of products">
+    <td style="cursor: default;" ><img [src]="'../../assets/Goods/' + product.product.picture"><div class="text">{{product.product.title}}</div></td>
+    <td style="cursor: default" >{{product.product.price}}</td>
+    <td style="cursor: default" >{{product.quantity}}</td>
+    <td style="cursor: default" >{{product.quantity * product.product.price}}</td>
+  </tr>
+
+  <div (click)="showMore = false" class="back-arrow">
+    <img style="height: 30px; width: 60px; padding: 0" src="../../assets/Icons/back.png">
+  </div>
+</table>
+
+
+<div *ngIf="isOrdersNotPreset" class="no-data">
+  <div class="title-no-data">You dont have any orders</div>
+  <div class="massage-no-data">Your orders will be displayed here</div>
+  <div (click)="addData()" class="button-no-data">go shopping</div>
+</div>

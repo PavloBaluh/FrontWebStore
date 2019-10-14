@@ -8,6 +8,7 @@
   </div>
   <div *ngIf="(isEditProfile)" class="user-data">
     <form #form="ngForm">
+      <div #alert1 class="alert"><b style="color: white">Error! </b>{{alertMassage}}<div (click)="alert1.style.display = 'none'" class="cross">x</div></div>
       <div class="form-entry">
         <label>Name<b>*</b></label>
         <div class="input-with-picture">
@@ -67,8 +68,8 @@
       </div>
     </form>
     <div class="buttons">
-      <div (click)="sendData()" class="button">submit</div>
-      <div (click)="isEditProfile = false" class="button">cancel</div>
+      <div (click)="sendData(alert1)" class="button">submit</div>
+      <div [style.pointer-events]="formObj.personalData.phoneNumber === ''?'none':'default'" (click)="isEditProfile = false" class="button">cancel</div>
     </div>
   </div>
 
@@ -81,7 +82,7 @@
         <input #oldPas type="password" name="name">
     </div>
     <div class="form-entry">
-      <label style="width: 30%">New Password<b>*</b></label>
+      <label style="width: 30%">New password<b>*</b></label>
         <input #pas type="password" name="surname">
     </div>
     <div class="form-entry">
@@ -113,10 +114,10 @@
     <div class="entry">
       <label class="label">Address:</label>
       <div class="data">{{
-        formObj.personalData.address.country + ', ' +
-        formObj.personalData.address.region + ', ' +
-        formObj.personalData.address.city + ', ' +
-        formObj.personalData.address.street + ' street' + ',' +
+        formObj.personalData.address.country + ' ' +
+        formObj.personalData.address.region + ' ' +
+        formObj.personalData.address.city + ' ' +
+        formObj.personalData.address.street + ' street' + ' ' +
         formObj.personalData.address.number}}</div>
     </div>
     <div class="buttons02">

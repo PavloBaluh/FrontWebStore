@@ -24,13 +24,19 @@ export class GoodsItemsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((res) => {
+      console.log(res[5] + 'inItem');
       if (res[0] === undefined) {
         this.defaultLoad();
         this.getProductCount(4, res[0], res[1], res[5]);
       } else {
+        if (res[3] > 4) {
+          this.currentPage = 1;
+        }
         this.service.getAllSortedGoods(res[0], res[1], res[2], res[3], res[4], this.group, res[5], this.currentPage - 1)
           .subscribe((sortedGoods) => {
             this.goodsToShow = sortedGoods;
+            this.dataService.GoodsChanel.next(this.goodsToShow);
+            this.dataService.GoodsChanel = new Subject<any>();
             this.getProductCount(res[3], res[0], res[1], res[5]);
           });
       }
@@ -65,12 +71,16 @@ export class GoodsItemsComponent implements OnInit {
     }
   }
 
-  addToWishes(el: Product) {
-    this.userService.addProductToWishes(el).subscribe((res) => {
-      if (res === true) {
-        this.dataService.WishesChanel.next(true);
-      }
-    });
+  addToWishes(el: Product, modalLogin: HTMLDivElement) {
+    if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
+      this.userService.addProductToWishes(el).subscribe((res) => {
+        if (res === true) {
+          this.dataService.WishesChanel.next(true);
+        }
+      });
+    } else {
+      modalLogin.style.display = 'block';
+    }
   }
 
   changePage(incr) {

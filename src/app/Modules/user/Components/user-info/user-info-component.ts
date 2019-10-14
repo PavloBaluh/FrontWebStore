@@ -57,10 +57,22 @@ export class UserInfoComponent implements OnInit {
     this.isEditProfile = true;
   }
 
-  sendData() {
-    this.userService.addUserInfo(this.formObj.personalData).subscribe((res) => {
-      this.isEditProfile = false;
-    });
+  sendData(alert: HTMLDivElement) {
+    const regExpUsernameSurname = new RegExp('\\w[A-Za-zА-Яа-яёЁЇїІіЄєҐґ]{3,12}');
+    if (this.formObj.personalData.name.match(regExpUsernameSurname) && this.formObj.personalData.surname.match(regExpUsernameSurname)
+      && this.formObj.personalData.address.country.match(regExpUsernameSurname)
+      && this.formObj.personalData.address.city.match(regExpUsernameSurname)
+      && (this.formObj.personalData.address.region.match(regExpUsernameSurname) || this.formObj.personalData.address.region === '')
+      && this.formObj.personalData.address.street.match(regExpUsernameSurname)
+      && this.formObj.personalData.phoneNumber.match('3?8?[\\(]?0[0-9]{2}[\\)]{0,1}\\s?\\d{3}[-]{0,1}\\d{2}[-]{0,1}\\d{2}')
+      && (this.formObj.personalData.address.number.match('[0-9]{1,6}([a-zA-Z0-9- ]{1,7})?') || this.formObj.personalData.address.number === '')) {
+      this.userService.addUserInfo(this.formObj.personalData).subscribe((res) => {
+        this.isEditProfile = false;
+      });
+    } else {
+      alert.style.display = 'block';
+      this.alertMassage = 'Invalid data try again';
+    }
   }
 
   editProfile() {
@@ -79,21 +91,33 @@ export class UserInfoComponent implements OnInit {
   }
 
   changePassword(value: string, value2: string, value3: string, alert: HTMLDivElement) {
+    const regExpPassword = new RegExp('\\w[A-Za-z0-9]{6,12}');
     this.alert = alert;
-    if (value2 === value3) {
-      this.userService.changePassword(value, value2).subscribe((res) => {
-        if (res) {
-          localStorage.setItem('_key_', '');
-          this.dataService.UserAucentication.next('none');
-          this.router.navigate(['login'], {queryParams: ['logout']});
+    if (value === '' || value2 === '' && value3 === '') {
+      this.alertMassage = 'You have to fill in all the fields';
+      this.alert.style.display = 'block';
+    } else {
+      if (value.match(regExpPassword) && value.match(regExpPassword)) {
+        if (value2 === value3) {
+          this.userService.changePassword(value, value2).subscribe((res) => {
+            if (res) {
+              localStorage.setItem('_key_', '');
+              this.dataService.UserAucentication.next('none');
+              this.router.navigate(['login'], {queryParams: ['logout']});
+            } else {
+              this.alertMassage = 'Invalid password';
+              this.alert.style.display = 'block';
+            }
+          });
         } else {
-          this.alertMassage = 'Invalid password';
+          this.alertMassage = 'You have entered a different passwords';
           this.alert.style.display = 'block';
         }
-      });
-    } else {
-      this.alertMassage = 'You have entered a different passwords';
-      this.alert.style.display = 'block';
+      } else {
+        this.alertMassage = 'Password should contains 6-12 letters(Roman)';
+        this.alert.style.display = 'block';
+      }
+
     }
   }
-  }
+}

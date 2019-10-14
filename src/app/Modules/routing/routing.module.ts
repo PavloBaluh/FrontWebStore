@@ -17,6 +17,7 @@ import {CheckoutComponent} from '../user/Components/checkout/checkout.component'
 import {InvoiceComponent} from '../user/Components/invoice/invoice.component';
 import {PrintComponent} from '../user/Components/print/print.component';
 import {OrderComponent} from '../user/Components/order/order.component';
+import {GoodComponent} from '../../Components/good/good.component';
 
 
 const routers: Routes = [
@@ -27,6 +28,7 @@ const routers: Routes = [
     path: ':name/goods', component: GoodsComponent,
     children: [{path: 'sort', component: GoodsItemsComponent}]
   },
+  {path: 'good/:id', component: GoodComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'confirmedRegistration/:username', component: ConfirmRegistrationComponent},

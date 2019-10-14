@@ -13,6 +13,7 @@ import {Basket} from './Models/Basket';
 import * as $ from 'jquery';
 import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
 import {templateJitUrl} from '@angular/compiler';
+import {PersonalData} from './Models/PersonalData';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
   suchProducts: Product[] = [];
   elem = null;
   down = null;
-  user: User = null;
+  user: User = new User(null, null, null, new PersonalData(null, null, null, null, null));
   isAuthenticated = false;
   isAnonimUser = false;
   compare = 0;
@@ -92,9 +93,14 @@ export class AppComponent implements OnInit {
       this.userService.getAuthentication().subscribe((user) => {
         if (user != null) {
           this.user = user;
+          if (user.personalData == null) {
+            user.personalData = new PersonalData(null, null, null, null, null);
+          }
           this.isAuthenticated = true;
         }
       });
+      this.miniGoods();
+      this.wishes();
     } else {
       this.isAnonimUser = true;
     }
@@ -106,13 +112,16 @@ export class AppComponent implements OnInit {
           this.isAuthenticated = false;
         } else {
           this.user = userAfterLogin;
+          if (this.user.personalData == null) {
+            this.user.personalData = new PersonalData(null, null, null, null, null);
+          }
           this.isAnonimUser = false;
           this.isAuthenticated = true;
+          this.miniGoods();
+          this.wishes();
         }
       });
     });
-    this.miniGoods();
-    this.wishes();
   }
 
   wishes() {
