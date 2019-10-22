@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       });
     } else {
       this.alert.nativeElement.style.backgroundColor = 'orangered';
-      this.massage = 'Invalid data';
+      this.massage = 'Invalid data(password  should begin from char and contain at least 6 symbols) ';
       this.isError = true;
       this.alert.nativeElement.style.display = 'block';
     }

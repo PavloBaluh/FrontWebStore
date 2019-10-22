@@ -11,23 +11,21 @@
     <div class="aside-header">Shop by price</div>
     <div class="aside-content">
       <div id="form">
-        <app-jquary-range-slider  (minAndMax)="changeMinAndMaxPrice($event)"></app-jquary-range-slider>
+        <app-jquary-range-slider (minAndMax)="changeMinAndMaxPrice($event)"></app-jquary-range-slider>
       </div>
     </div>
     <div class="aside-header">Shop by properties</div>
     <div class="aside-content">
       <div *ngFor="let property of properties" class="properties-container">
         <div class="properties">{{property.propertyName}}</div>
-        <ng-container *ngFor="let propertyValue of propertiesValues">
-          <div *ngIf="propertyValue.property.propertyName === property.propertyName" class="propertiesValue">
-            <label>
-              <input #input  type="checkbox">
-              <span (click)="selectPropertyValue(propertyValue, input)"></span>
-            </label>
-            <div class="text">{{getPropertiesValue(property, propertyValue)}}</div>
-          </div>
-        </ng-container>
-    </div>
+        <div *ngFor="let propertyValue of property.values" class="propertiesValue">
+          <label>
+            <input [checked]="inputPropertyId == propertyValue.id" [disabled]="propertyValue.active === false" #input type="checkbox">
+            <span [style.border-color]="propertyValue.active?'black':'gray'" (click)="selectPropertyValue(propertyValue, input,property)"></span>
+          </label>
+          <div [style.color]="propertyValue.active?'black':'grey'" class="text">{{propertyValue.value}}</div>
+        </div>
+      </div>
     </div>
   </aside>
   <div class="shop-selection">
@@ -64,7 +62,7 @@
       </div>
     </div>
     <div style="height: 100%">
-    <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

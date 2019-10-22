@@ -11,12 +11,12 @@
       ${{el.price}}
     </div>
     <div class="selection">
-      <div (click)="addToCard(el,modalLogin,modalBuy)" class="add">
+      <div (click)="addToCard(el,modalLogin,modalBuy,$event)" class="add">
         <img src="/assets/Icons/shopping-card-white.png" alt="01">
         <div class="text-cart">Add to card</div>
       </div>
       <div #img class="img">
-        <img (click)="addToWishes(el,modalLogin)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
+        <img (click)="addToWishes(el,modalLogin,$event)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
       </div>
       <img class="hoverImg" src="/assets/Icons/weight-balance.png" alt="03">
     </div>
@@ -41,4 +41,7 @@
     <app-login></app-login>
   </div>
 </div>
-
+<div *ngIf="!isProductsPresent" class="no-data">
+  <div class="title-no-data">Sorry we doesnt have products with current filters</div>
+  <div class="massage-no-data">Try to change filter parameters and continue</div>
+</div>

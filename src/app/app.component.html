@@ -29,7 +29,7 @@
           <div class="counter" [textContent]="shoppingCard"></div>
           <div *ngIf="showMiniBasket" class="basket-add">
             <div class="basket-count">You have {{shoppingCard}} goods in cart</div>
-            <div class="product" *ngFor="let cartItem of productsInCart">
+            <div [routerLink]="'/good/' + cartItem.product.id"  class="product" *ngFor="let cartItem of productsInCart">
               <img class="picture-cart" [src]="'../../assets/Goods/' + cartItem.product.picture">
               <div class="item-info">
                 <div style="font-size: 14px;">{{cartItem.product.title}}</div>
@@ -58,7 +58,7 @@
       <div #dropdown1  class="dropdown1">
         <div *ngFor="let p of suchProducts" class="such-product">
           <img style=" width:40px; height: 30px; margin-left: 10px" [src]="'../assets/Goods/' + p.picture">
-          <div routerLink="/" class="such-title">{{p.title}}</div>
+          <div [routerLink]="'/good/' + p.id"  class="such-title">{{p.title}}</div>
         </div>
         <div *ngIf="suchProducts.length == 0" class="no-elem">
           <p>No matches</p>

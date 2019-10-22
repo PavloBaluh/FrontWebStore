@@ -6,7 +6,7 @@
     <th width="30%">Order Total</th>
   </tr>
   <tr (click)="showMoreProducts(order.orderProducts)" *ngFor="let order of orders">
-    <td>{{order.localDateTime|date:'y-M-d h:m:s'}}</td>
+    <td>{{order.localDateTime|date:'y-MM-dd hh:mm:ss'}}</td>
     <td><i class="status">{{order.orderStatus}}</i></td>
     <td><i style="background-color: orange" class="status">{{order.payed == false ? 'Not Yet' : 'Paid'}}</i></td>
     <td>{{order.orderProducts|orderSum}}</td>

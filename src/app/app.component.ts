@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
     down.style.display = 'none';
     event.stopPropagation();
     if (!(this.router.url.split('?')[0] === ('/' + name + '/goods/sort').replace(' ', '%20'))) {
-      this.router.navigate([name + '/goods']);
+    this.router.navigate([name + '/goods']);
     }
   }
 

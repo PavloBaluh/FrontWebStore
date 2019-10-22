@@ -18,8 +18,8 @@ export class UserMenuComponent implements OnInit {
   }
 
   logout() {
+    this.router.navigate(['']);
     localStorage.setItem('_key_', '');
     this.service.UserAucentication.next('none');
-    this.router.navigate(['']);
   }
 }

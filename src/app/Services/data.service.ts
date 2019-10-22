@@ -8,7 +8,6 @@ export class DataService {
 
   constructor() {
   }
-
   GoodsChanel = new Subject();
   CurrentGroup = new Subject();
   MinMaxPrice = new Subject();

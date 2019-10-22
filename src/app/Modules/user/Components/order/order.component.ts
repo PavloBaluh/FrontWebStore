@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../Services/user.service';
 import {Order} from '../../../../Models/Order';
 import {Router} from '@angular/router';
-import {Product} from '../../../../Models/Product';
 import {Basket} from '../../../../Models/Basket';
 
 @Component({

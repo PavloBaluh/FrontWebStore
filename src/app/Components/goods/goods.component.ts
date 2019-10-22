@@ -18,8 +18,7 @@ export class GoodsComponent implements OnInit {
   @ViewChild('dropdown', {static: true}) dropdown: ElementRef;
   @ViewChild('dropdown1', {static: true}) dropdown1: ElementRef;
   @ViewChild('dropdown2', {static: true}) dropdown2: ElementRef;
-  properties = [];
-  propertiesValues = [];
+  properties: Property[] = [];
   hierarchy = [];
   group = '';
   sortDirection = 'asc';
@@ -28,6 +27,7 @@ export class GoodsComponent implements OnInit {
   priceFrom = 0;
   priceTo = 0;
   propertiesSort = [];
+  inputPropertyId = 0;
 
   constructor(private dataService: DataService, private activatedRoute: ActivatedRoute,
               private service: MainService, private router: Router, mainService: MainService) {
@@ -35,34 +35,24 @@ export class GoodsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((param) => {
-      this.group = param.name;
-      this.sortDirection = 'asc';
-      this.sortBy = 'title';
-      this.limit = 4;
+      if (param.name.includes('+')) {
+        this.group = param.name.split('+')[0];
+        this.propertiesSort = [param.name.split('+')[1]];
+        this.inputPropertyId = param.name.split('+')[1];
+      } else {
+        this.group = param.name;
+      }
       this.dataService.CurrentGroup.next(this.group);
       this.getHierarchy();
-      this.dataService.GoodsChanel.subscribe((res: Product[]) => {
-          this.getProperties(res);
-        }
-      );
-      if (this.activatedRoute.snapshot.queryParamMap.keys.length === 0) {
-        this.router.navigate([param.name + '/goods/sort']);
-        this.dataService.MinMaxPrice.subscribe((minMax) => {
-          this.priceFrom = minMax[0];
-          this.priceTo = minMax[1];
-        });
-      } else {
-        this.activatedRoute.queryParams.subscribe((queryParams) => {
-          if (queryParams[5] !== undefined) {
-            this.propertiesSort = queryParams[5];
-          }
-          this.service.getMinMaxPrice(this.group).subscribe((res) => {
-            this.priceFrom = res[0];
-            this.priceTo = res[1];
-            this.sort();
-          });
-        });
-      }
+      this.service.getMinMaxPrice(this.group).subscribe((res) => {
+        this.priceFrom = res[0];
+        this.priceTo = res[1];
+        this.sort();
+      });
+      this.dataService.MinMaxPrice.subscribe((minMax) => {
+        this.priceFrom = minMax[0];
+        this.priceTo = minMax[1];
+      });
     });
   }
 
@@ -70,9 +60,36 @@ export class GoodsComponent implements OnInit {
   getHierarchy() {
     this.service.getHierarchy(this.group).subscribe((res: Array<string>) => {
       this.hierarchy = res;
+      this.getAllProperties();
     });
   }
 
+
+  getAllProperties() {
+    this.service.getAllProperties(this.hierarchy[1]).subscribe((res) => {
+      this.properties = res;
+      this.properties.forEach(value => {
+        value.values.forEach(value1 => {
+          value1.active = true;
+        });
+      });
+      if (this.inputPropertyId !== 0) {
+        this.properties.forEach(value => {
+          value.values.forEach(value1 => {
+            if (value1.id == this.inputPropertyId) {
+              value.values.forEach(value2 => {
+                if (value2.id == this.inputPropertyId) {
+                  value2.active = true;
+                } else {
+                  value2.active = false;
+                }
+              });
+            }
+          });
+        });
+      }
+    });
+  }
 
   showDropDown(select: HTMLDivElement, dropdown) {
     select.style.border = '2px solid rgb(135, 206, 235)';
@@ -107,52 +124,28 @@ export class GoodsComponent implements OnInit {
   }
 
   sort() {
-    console.log(this.propertiesSort);
     this.router.navigate([this.group + '/goods/sort'],
       {queryParams: [this.priceFrom, this.priceTo, this.sortBy, this.limit, this.sortDirection, this.propertiesSort]});
   }
 
-
-  getProperties(goods: Product[]) {
-    let arr: PropertyValue[] = [];
-    let unicArr: PropertyValue[] = [];
-    let unicProp: Property[] = [];
-    goods.forEach((propArr) => {
-      propArr.propertyValues.forEach((propValue) => {
-        if (propValue.id !== undefined) {
-          arr.push(propValue);
-        }
-      });
-    });
-    arr.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
-    unicArr[0] = arr[0];
-    unicProp[0] = arr[0].property;
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i].id !== arr[i - 1].id) {
-        unicArr.push(arr[i]);
-      }
-      if (arr[i].property.propertyName !== arr[i - 1].property.propertyName) {
-        unicProp.push(arr[i].property);
-      }
+  selectPropertyValue(propertyValue: PropertyValue, input: HTMLInputElement, property: Property) {
+    if (propertyValue.active === false) {
+      return;
     }
-    console.log(this.propertiesSort);
-    this.propertiesValues = unicArr;
-    this.properties = unicProp;
-  }
-
-  getPropertiesValue(property: Property, propertyValue: PropertyValue) {
-    if (propertyValue.property.propertyName === property.propertyName) {
-      return propertyValue.value;
-    }
-    return '';
-  }
-
-  selectPropertyValue(propertyValue, input) {
-    console.log(this.propertiesSort);
     if (input.checked === false) {
       this.propertiesSort.push(propertyValue.id);
+      property.values.forEach(value => {
+        if (value !== propertyValue) {
+          value.active = false;
+        }
+      });
     } else {
       this.propertiesSort.splice(this.propertiesSort.indexOf(propertyValue.id), 1);
+      property.values.forEach(value => {
+        if (value.active === false) {
+          value.active = true;
+        }
+      });
     }
     this.sort();
   }

@@ -336,6 +336,7 @@ li:after {
   display: flex;
   flex-direction: row;
   align-items: center;
+  outline: none;
 }
 .product:hover{
   transition: 1s;
@@ -391,6 +392,7 @@ li:after {
   cursor: pointer;
 }
 .such-title{
+  outline: none;
   margin-left: 20px;
   font-size: 15px;
 }

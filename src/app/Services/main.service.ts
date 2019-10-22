@@ -14,8 +14,8 @@ export class MainService {
   constructor(private http: HttpClient) {
   }
 
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.api + '/getProductById/' + id);
+  getProductById(id: number) {
+    return this.http.get(this.api + '/getProductById/' + id, {responseType: 'json'});
   }
 
 
@@ -66,6 +66,10 @@ export class MainService {
     params.append('priceTo', priceTo);
     params.append('properties', props);
     return this.http.post(this.api + '/getProductsCount/' + group, params);
+  }
+
+  getAllProperties(sub: string): Observable<Property[]> {
+    return this.http.get<Property[]>(this.api + '/getAllProperties/' + sub);
   }
 
 
