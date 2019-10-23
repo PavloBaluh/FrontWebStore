@@ -33,7 +33,7 @@ export class UserService {
 
   getAuthentication(): Observable<User> {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    return this.http.get<User>(this.apiUrl + 'getAuthentication', {headers: headers});
+    return this.http.get<User>(this.apiUrl + 'getAuthentication', {headers});
   }
 
   confirmRegistration(user) {
@@ -56,7 +56,7 @@ export class UserService {
       // @ts-ignore
       params.append('userPicture', userdata.picture, userdata.picture.name);
     }
-    return this.http.post(this.apiUrl + 'addUserData', params, {headers: headers});
+    return this.http.post(this.apiUrl + 'addUserData', params, {headers});
   }
 
   addProductInCart(res: Basket) {
@@ -72,6 +72,11 @@ export class UserService {
   addProductToWishes(product: Product) {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.post(this.apiUrl + 'addProductToWishes', product, {headers});
+  }
+
+  addProductToCompare(product: Product) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.post(this.apiUrl + 'addProductToCompare', product, {headers});
   }
 
   getAllWishes(): Observable<Product[]> {
@@ -106,5 +111,16 @@ export class UserService {
     params.append('newPassword', newPas);
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.post(this.apiUrl + 'changePassword', params, {headers});
+  }
+
+
+  getComparisons(): Observable<Product[]> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Product[]>(this.apiUrl + 'getComparison', {headers});
+  }
+
+  deleteFromCompare(product: any) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.delete(this.apiUrl + 'deleteFromComparison/' +  product.id, {headers});
   }
 }

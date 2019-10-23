@@ -14,10 +14,11 @@ import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { PrintComponent } from './Components/print/print.component';
 import { OrderComponent } from './Components/order/order.component';
 import { OrderSumPipe } from './pipes/order-sum.pipe';
+import { CompareComponent } from './Components/compare/compare.component';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent,
-    AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent, CheckoutComponent, InvoiceComponent, PrintComponent, OrderComponent, OrderSumPipe],
+    AddToBasketModalComponent, UserMenuComponent, UserInfoComponent, WishesComponent, CheckoutComponent, InvoiceComponent, PrintComponent, OrderComponent, OrderSumPipe, CompareComponent],
   imports: [
     FormsModule,
     RoutingModule,

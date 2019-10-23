@@ -7,6 +7,8 @@ import {DataService} from '../../Services/data.service';
 import {UserService} from '../../Modules/user/Services/user.service';
 import {PropertyValue} from '../../Models/PropertyValue';
 import {Property} from '../../Models/Property';
+import {Category} from '../../Models/Category';
+import {SubCategory} from '../../Models/SubCategory';
 
 @Component({
   selector: 'app-good',
@@ -15,7 +17,7 @@ import {Property} from '../../Models/Property';
 })
 export class GoodComponent implements OnInit {
   product: Product = new Product(0, '', '', 0, 0, '', 0, 0,
-    new Group('', ''));
+    new Group('', ''), new SubCategory());
   category = '';
   subCategory = '';
   group = '';

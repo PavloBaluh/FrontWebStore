@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="cur" *ngFor="let el of arr">
+    <div class="title-container">{{el.subCategory}}</div>
+    <div class="products">
+      <div *ngFor="let product of el.products" class="product">
+        <div (click)="deleteEl(product)"  class="cross">x</div>
+        <img [src]="'/assets/Goods/' + product.picture" class="img">
+        <div class="data">
+          <div class="title">{{product.title}}</div>
+          <div [style.color]="product.availableNumber > 0 ? 'green' : 'black'"
+               class="count">{{product.availableNumber > 0 ? 'SALE' : 'NOT AVAILABLE '}}</div>
+          <div class="price">$ {{product.price}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="button">Compare</div>
+  </div>
+</div>
+
+
+<div *ngIf="isDataNotPresent" class="no-data">
+  <div class="title-no-data">Your comparisons are empty</div>
+  <div class="massage-no-data">Add something and come back</div>
+  <div routerLink="/" class="button-no-data">add comparisons now</div>
+</div>

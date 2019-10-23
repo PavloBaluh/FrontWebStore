@@ -72,5 +72,12 @@ export class MainService {
     return this.http.get<Property[]>(this.api + '/getAllProperties/' + sub);
   }
 
+  getMostPopularProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.api + '/getMostPopular/');
+  }
+  getMostLatestProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.api + '/getLatest/');
+  }
+
 
 }

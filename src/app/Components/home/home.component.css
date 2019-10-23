@@ -6,7 +6,6 @@
 }
 
 
-
 #slides article {
   width: 20%;
   float: left;
@@ -37,7 +36,8 @@ article img {
 #switch3:checked ~ #controls label:nth-child(2),
 #switch4:checked ~ #controls label:nth-child(3),
 #switch5:checked ~ #controls label:nth-child(4) {
-  border: 33px solid transparent; border-right: 33px solid #F3EEEE;
+  border: 33px solid transparent;
+  border-right: 33px solid #F3EEEE;
   float: left;
   display: block;
   width: 0;
@@ -51,7 +51,8 @@ article img {
 #switch3:checked ~ #controls label:nth-child(4),
 #switch4:checked ~ #controls label:nth-child(5),
 #switch5:checked ~ #controls label:nth-child(1) {
-  border: 33px solid transparent; border-left: 33px solid #F3EEEE;
+  border: 33px solid transparent;
+  border-left: 33px solid #F3EEEE;
   float: right;
   display: block;
   width: 0;
@@ -107,3 +108,78 @@ input {
   transition: opacity 0.2s ease-out;
 }
 
+.products {
+  margin-top: 50px
+}
+
+.selection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #4D4A4A;
+  text-transform: uppercase;
+}
+
+.select {
+  margin-right: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid #ffffff;
+  cursor: pointer;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  width: 70%;
+  margin: 0 auto;
+
+}
+
+.item {
+  outline: none;
+  cursor: pointer;
+  width: 25%;
+  margin-right: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
+}
+
+.item:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.item:last-child {
+  margin-right: 0;
+}
+
+.items img {
+  box-sizing: border-box;
+  width: 100%;
+  height: 200px;
+  padding: 20px 5px 10px
+}
+
+.title {
+  margin-top: 10px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.price {
+  color: rgb(0, 128, 153);
+  font-weight: 600;
+  padding-top: 5px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}

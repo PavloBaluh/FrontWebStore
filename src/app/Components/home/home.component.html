@@ -25,4 +25,17 @@
       <label for="switch5"></label>
     </div>
   </article>
+  <div class="products">
+    <div class="selection">
+      <div #select1 (click)="change(select1,select2,1)" class="select">popular</div>
+      <div #select2 (click)="change(select2,select1,2)" class="select">latest</div>
+    </div>
+    <div class="items">
+      <div [routerLink]="'/good/' + product.id" *ngFor="let product of show" class="item">
+        <img [src]="'/assets/Goods/' + product.picture" class="picture">
+        <div class="title">{{product.title}}</div>
+        <div class="price">$ {{product.price}}</div>
+      </div>
+    </div>
+  </div>
 

@@ -76,6 +76,19 @@ export class GoodsItemsComponent implements OnInit {
     }
   }
 
+  addToCompare(el: Product, modalLogin: HTMLDivElement, modalBuy: HTMLDivElement, event: MouseEvent) {
+    event.stopPropagation();
+    if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
+      this.userService.addProductToCompare(el).subscribe((res) => {
+        if (res === true) {
+          this.dataService.WishesChanel.next(true);
+        }
+      });
+    } else {
+      modalLogin.style.display = 'block';
+    }
+  }
+
   changePage(incr) {
     if (incr === 'inc') {
       if (!(this.currentPage > this.pages.length - 1)) {

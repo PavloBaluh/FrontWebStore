@@ -18,6 +18,7 @@ import {InvoiceComponent} from '../user/Components/invoice/invoice.component';
 import {PrintComponent} from '../user/Components/print/print.component';
 import {OrderComponent} from '../user/Components/order/order.component';
 import {GoodComponent} from '../../Components/good/good.component';
+import {CompareComponent} from '../user/Components/compare/compare.component';
 
 
 const routers: Routes = [
@@ -42,7 +43,8 @@ const routers: Routes = [
       {path: 'checkout', component: CheckoutComponent},
       {path: 'invoice', component: InvoiceComponent},
       {path: 'print', component: PrintComponent},
-      {path: 'orders', component: OrderComponent}
+      {path: 'orders', component: OrderComponent},
+      {path: 'comparisons', component: CompareComponent}
     ]
   }
 ];
