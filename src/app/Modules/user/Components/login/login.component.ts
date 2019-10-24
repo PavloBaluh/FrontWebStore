@@ -48,10 +48,13 @@ export class LoginComponent implements OnInit {
     const regExpPassword = new RegExp('\\w[A-Za-z0-9]{6,12}');
     if (regExpUsername.test(username) && regExpPassword.test(password)) {
       this.service.login(username, password).subscribe((res) => {
+        console.log(res);
         if (res.headers.get('Authorization') != null) {
           localStorage.setItem('_key_', res.headers.get('Authorization'));
-          this.dataService.UserAucentication.next(username);
-          this.router.navigate(['']);
+          this.service.getAuthentication().subscribe((user) => {
+            this.dataService.UserAucentication.next(user);
+            this.router.navigate(['']);
+          });
 
         } else {
           this.isError = true;
@@ -59,6 +62,11 @@ export class LoginComponent implements OnInit {
           this.alert.nativeElement.style.display = 'block';
           this.alert.nativeElement.style.backgroundColor = 'orangered';
         }
+      }, (error) => {
+        this.isError = true;
+        this.errorMassage = 'You are blocked';
+        this.alert.nativeElement.style.display = 'block';
+        this.alert.nativeElement.style.backgroundColor = 'orangered';
       });
     } else {
       this.isError = true;

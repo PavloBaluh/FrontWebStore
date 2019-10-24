@@ -13,7 +13,7 @@ import {Order} from '../../../../Models/Order';
 })
 export class InvoiceComponent implements OnInit {
   date: Date = new Date();
-  user: User = new User('', '', '', new PersonalData());
+  user: User = new User(0, '', '', '', new PersonalData());
   order: Order;
   payType = '';
   total = 0;

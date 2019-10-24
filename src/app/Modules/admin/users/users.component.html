@@ -1,0 +1,25 @@
+ <div class="container">
+  <div class="users">
+    <div [style.border-color]="user.accountNonLocked?' #eaeaea':'rgb(0, 128, 128)'" [style.background-color]="user.accountNonLocked?'white':'grey'" *ngFor="let user of users" class="user">
+      <div class="info-block">
+        <p class="customer">Customer</p>
+        <div class="username">{{user.username}}</div>
+        <p class="info">Email:</p>
+        <div class="info">{{user.email}}</div>
+        <p *ngIf="user.personalData.address.country !== ''" class="info">Address:</p>
+        <div *ngIf="user.personalData.address.country !== ''" class="info">{{ user.personalData.address.country + ' ' +
+        user.personalData.address.region + ' ' +
+        user.personalData.address.city + ' ' +
+        user.personalData.address.street + ' street' + ' ' +
+        user.personalData.address.number}}</div>
+      </div>
+      <div class="picture-block">
+        <img [src]="'assets/Users/' + user.personalData.picture ">
+        <div (click)="change(user)" class="button">
+          <div>{{user.accountNonLocked?'Lock':'Unlock'}}</div>
+          <img class="lock" [src]="user.accountNonLocked?'assets/Icons/lock.png':'assets/Icons/unlock.png'">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

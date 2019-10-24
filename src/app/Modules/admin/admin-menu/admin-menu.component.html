@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="left-menu">
+    <div class="outer-container">
+      <div routerLink="userInfo" class="inner-container">
+        <img src="assets/Icons/man-user-white.png">
+        <div class="menu-selection">Personal data</div>
+      </div>
+      <div routerLink="wishes" class="inner-container">
+        <img src="assets/Icons/users.png">
+        <div class="menu-selection">Users</div>
+      </div>
+      <div routerLink="cart" class="inner-container">
+        <img src="assets/Icons/shopping-cart-white.png">
+        <div class="menu-selection">Orders</div>
+      </div>
+      <div  routerLink="orders" class="inner-container">
+        <img src="assets/Icons/list.png">
+        <div class="menu-selection">Content treeview</div>
+      </div>
+      <div routerLink="comparisons" class="inner-container">
+        <img src="assets/Icons/exchange-arrows.png">
+        <div class="menu-selection">My comparisons</div>
+      </div>
+      <div (click)="logout()" class="inner-container">
+        <img src="assets/Icons/logout.png">
+        <div class="menu-selection">Logout</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

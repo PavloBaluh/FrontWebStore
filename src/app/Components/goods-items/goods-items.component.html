@@ -15,10 +15,13 @@
         <img src="/assets/Icons/shopping-card-white.png" alt="01">
         <div class="text-cart">Add to card</div>
       </div>
-      <div #img class="img">
+      <div class="img">
         <img (click)="addToWishes(el,modalLogin,$event)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
       </div>
-      <img  (click)="addToCompare(el,modalLogin,modalBuy,$event)" class="hoverImg" src="/assets/Icons/weight-balance.png" alt="03">
+      <div class="img">
+        <img (click)="addToCompare(el,modalLogin,modalBuy,$event)" class="hoverImg"
+             src="/assets/Icons/weight-balance.png" alt="03">
+      </div>
     </div>
   </div>
 </div>

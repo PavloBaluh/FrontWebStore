@@ -81,7 +81,7 @@ export class GoodsItemsComponent implements OnInit {
     if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
       this.userService.addProductToCompare(el).subscribe((res) => {
         if (res === true) {
-          this.dataService.WishesChanel.next(true);
+          this.dataService.CompareChanel.next(true);
         }
       });
     } else {

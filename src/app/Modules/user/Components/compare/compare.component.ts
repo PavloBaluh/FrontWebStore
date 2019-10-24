@@ -3,6 +3,9 @@ import {UserService} from '../../Services/user.service';
 import {Product} from '../../../../Models/Product';
 import {MainService} from '../../../../Services/main.service';
 import {SubCategory} from '../../../../Models/SubCategory';
+import {DataService} from '../../../../Services/data.service';
+import {Basket} from '../../../../Models/Basket';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-compare',
@@ -15,7 +18,7 @@ export class CompareComponent implements OnInit {
   products: Product[];
   arr = [];
 
-  constructor(private userService: UserService, private mainService: MainService) {
+  constructor(private userService: UserService, private mainService: MainService, private dataService: DataService, private router: Router) {
   }
 
   ngOnInit() {
@@ -56,9 +59,12 @@ export class CompareComponent implements OnInit {
     });
   }
 
-  deleteEl(product: any) {
+  deleteEl(product: any, event: Event) {
+    event.stopPropagation();
+
     this.userService.deleteFromCompare(product).subscribe((res) => {
       if (res === true) {
+        this.dataService.CompareChanel.next(false);
         this.arr.forEach((el) => {
           el.products = el.products.filter((pr) => {
             return pr.id !== product.id;
@@ -73,5 +79,9 @@ export class CompareComponent implements OnInit {
         this.isDataPresent = false;
       }
     });
+  }
+
+  compare(products) {
+    this.router.navigate(['userMenu/compare'], {queryParams: {Products: JSON.stringify(products.products), sub: products.subCategory}});
   }
 }

@@ -13,6 +13,7 @@ import {UserModule} from './Modules/user/user.module';
 import { BasketComponent } from './Modules/user/Components/basket/basket.component';
 import { DescriptionPipe } from './Pipes/description.pipe';
 import {GoodComponent} from './Components/good/good.component';
+import {AdminModule} from './Modules/admin/admin.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {GoodComponent} from './Components/good/good.component';
     BrowserModule,
     HttpClientModule,
     RoutingModule,
-    UserModule
+    UserModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

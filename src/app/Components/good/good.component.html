@@ -9,8 +9,8 @@
     <div class="text">Description: {{product.description}}</div>
     <div class="text">Properties:</div>
     <div (click)="getByPropValue(prop)" style="margin-left: 20px" class="text"
-         *ngFor=" let prop of properties">{{prop.propertyName + ': '}}
-      <b style="color:rgb(28, 99, 96);">{{prop.values[0].value}}</b></div>
+         *ngFor=" let prop of properties">{{prop.propertyName + ': '}}<b
+      style="color:rgb(28, 99, 96);">{{prop.values[0].value}}</b></div>
     <div class="text">Category: <b [routerLink]="'/menu/' +category"
                                    style="color:rgb(28, 99, 96);padding-right: 20px">{{category}}</b>
       Subcategory: <b [routerLink]="'/menu/' + subCategory"
@@ -20,7 +20,7 @@
     <div class="buttons">
       <div (click)="addToCart(modalBuy,modalLogin)" class="button">add to cart</div>
       <div (click)="addToWishes(modalLogin)" class="button">wishlist</div>
-      <div class="button">compare</div>
+      <div (click)="addToCompares(modalLogin)" class="button">compare</div>
     </div>
   </div>
 </div>

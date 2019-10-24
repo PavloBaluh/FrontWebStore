@@ -2,8 +2,8 @@
   <div class="cur" *ngFor="let el of arr">
     <div class="title-container">{{el.subCategory}}</div>
     <div class="products">
-      <div *ngFor="let product of el.products" class="product">
-        <div (click)="deleteEl(product)"  class="cross">x</div>
+      <div [routerLink]="'/good/' + product.id" *ngFor="let product of el.products" class="product">
+        <div (click)="deleteEl(product,$event)"  class="cross">x</div>
         <img [src]="'/assets/Goods/' + product.picture" class="img">
         <div class="data">
           <div class="title">{{product.title}}</div>
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="button">Compare</div>
+    <div (click)="compare(el)" class="button">Compare</div>
   </div>
 </div>
 

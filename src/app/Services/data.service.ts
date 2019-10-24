@@ -16,4 +16,5 @@ export class DataService {
   ProductChanel = new Subject();
   AllBasketChanel = new Subject();
   WishesChanel = new Subject();
+  CompareChanel = new Subject();
 }

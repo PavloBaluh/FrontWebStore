@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="characters">
+    <div *ngFor="let prop of props" class="character">
+      <div style="font-weight: 600" class="col">{{prop.propertyName}}</div>
+    </div>
+  </div>
+  <div class="items">
+    <div *ngFor="let product of products" class="product">
+      <div  class="col-pic">
+        <img [src]="'/assets/Goods/' + product.picture">
+        <div [routerLink]="'/good/' + product.id" style="color: blue;" class="title">{{product.title}}</div>
+      </div>
+      <div style="text-align: left" *ngFor="let prop of product.propertyValues"  class="col">{{prop.value}}</div>
+    </div>
+  </div>
+</div>

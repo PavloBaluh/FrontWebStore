@@ -14,16 +14,16 @@
           <h6 routerLink="/register">Sign-up</h6>
         </div>
       </div>
-      <div *ngIf="isAuthenticated" class="user">
-        <div class="icon-container">
+      <div [style.justify-content]="isAdmin?'flex-end':'flex-start'" *ngIf="isAuthenticated || isAdmin" class="user">
+        <div *ngIf="isAuthenticated" routerLink="userMenu/comparisons" class="icon-container">
           <img class="icon" src="../assets/Icons/exchange-arrows-black.png">
           <div class="counter" [textContent]="compare"></div>
         </div>
-        <div routerLink="userMenu/wishes" class="icon-container">
+        <div *ngIf="isAuthenticated" routerLink="userMenu/wishes" class="icon-container">
           <img class="icon" src="../assets/Icons/like.png">
           <div class="counter" [textContent]="like"></div>
         </div>
-        <div (click)="showMiniBasket? showMiniBasket = false:showMiniBasket = true"
+        <div *ngIf="isAuthenticated" (click)="showMiniBasket? showMiniBasket = false:showMiniBasket = true"
              [style.background-color]="showMiniBasket?'white':'rgb(28, 99, 96)'" class="icon-container">
           <img class="icon" src="../assets/Icons/shopping-cart.png">
           <div class="counter" [textContent]="shoppingCard"></div>
@@ -41,14 +41,14 @@
             <div (click)="showCart($event)" class="view">View all carts</div>
           </div>
         </div>
-        <div routerLink="userMenu/userInfo" class="profile">
+        <div [routerLink]="isAuthenticated?'userMenu/userInfo':'adminMenu'" class="profile">
           <img class="user-icon" [src]="user.personalData.picture == null?'../assets/Users/man_user.png':'../assets/Users/' + user.personalData.picture">
           <div style="font-weight: 600" class="text">{{user.username}}</div>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="!router.url.startsWith('/userMenu')" class="header-2">
+  <div  *ngIf="!(router.url.startsWith('/userMenu')||router.url.startsWith('/adminMenu'))" class="header-2">
     <div class="promo">everything you want</div>
     <div class="such-selection">
       <input #suchInp (click)="such(dropdown1, suchInp)" id="such" type="text">
@@ -66,7 +66,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!router.url.startsWith('/userMenu')" class="header-3">
+  <div *ngIf="!(router.url.startsWith('/userMenu')||router.url.startsWith('/adminMenu'))" class="header-3">
     <nav class="nav">
       <a class="nav__link" style="padding-top: 15px;" routerLink="/">Home</a>
       <ul class="nav__link unselectable">

@@ -69,4 +69,16 @@ export class GoodComponent implements OnInit {
   getByPropValue(prop: Property) {
     this.router.navigate([this.group + '+' + prop.values[0].id + '/goods/']);
   }
+
+  addToCompares(modalLogin: HTMLDivElement) {
+    if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
+      this.userService.addProductToCompare(this.product).subscribe((res) => {
+        if (res === true) {
+          this.dataService.CompareChanel.next(true);
+        }
+      });
+    } else {
+      modalLogin.style.display = 'block';
+    }
+  }
 }

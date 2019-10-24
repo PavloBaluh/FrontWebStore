@@ -31,9 +31,10 @@ export class AppComponent implements OnInit {
   suchProducts: Product[] = [];
   elem = null;
   down = null;
-  user: User = new User(null, null, null, new PersonalData(null, null, null, null, null));
+  user: User = new User(null, null, null, null, new PersonalData());
   isAuthenticated = false;
   isAnonimUser = false;
+  isAdmin = false;
   compare = 0;
   like = 0;
   shoppingCard = 0;
@@ -84,33 +85,57 @@ export class AppComponent implements OnInit {
     down.style.display = 'none';
     event.stopPropagation();
     if (!(this.router.url.split('?')[0] === ('/' + name + '/goods/sort').replace(' ', '%20'))) {
-    this.router.navigate([name + '/goods']);
+      this.router.navigate([name + '/goods']);
     }
   }
 
   ngOnInit(): void {
     if (localStorage.getItem('_key_') !== null && localStorage.getItem('_key_').startsWith('Bearer')) {
       this.userService.getAuthentication().subscribe((user) => {
-        if (user != null) {
+        // @ts-ignore
+        if (user != null && user.authorities[0].authority === 'ROLE_USER') {
           this.user = user;
           if (user.personalData == null) {
             user.personalData = new PersonalData(null, null, null, null, null);
           }
           this.isAuthenticated = true;
+          this.miniGoods();
+          this.wishes();
+          this.compares();
+        } else {
+          // @ts-ignore
+          if (user != null && user.authorities[0].authority === 'ROLE_ADMIN') {
+            user.personalData = new PersonalData(null, null, null, null, null);
+            this.user = user;
+            this.isAdmin = true;
+          }
         }
       });
-      this.miniGoods();
-      this.wishes();
     } else {
       this.isAnonimUser = true;
+      this.isAdmin = false;
+      this.isAuthenticated = false;
     }
-    this.dataService.UserAucentication.subscribe((name) => {
+    this.dataService.UserAucentication.subscribe((user) => {
       this.userService.getAuthentication().subscribe((userAfterLogin) => {
         if (userAfterLogin === null) {
           this.user = null;
           this.isAnonimUser = true;
           this.isAuthenticated = false;
-        } else {
+          this.isAdmin = false;
+        }
+        // @ts-ignore
+        if (userAfterLogin !== null && userAfterLogin.authorities[0].authority === 'ROLE_ADMIN') {
+          this.user = userAfterLogin;
+          if (this.user.personalData == null) {
+            this.user.personalData = new PersonalData(null, null, null, null, null);
+            this.isAnonimUser = false;
+            this.isAuthenticated = false;
+            this.isAdmin = true;
+          }
+        }
+        // @ts-ignore
+        if (userAfterLogin !== null && userAfterLogin.authorities[0].authority === 'ROLE_USER') {
           this.user = userAfterLogin;
           if (this.user.personalData == null) {
             this.user.personalData = new PersonalData(null, null, null, null, null);
@@ -119,6 +144,7 @@ export class AppComponent implements OnInit {
           this.isAuthenticated = true;
           this.miniGoods();
           this.wishes();
+          this.compares();
         }
       });
     });
@@ -134,6 +160,24 @@ export class AppComponent implements OnInit {
       }
       if (res === false) {
         this.like -= 1;
+      }
+    });
+  }
+
+  compares() {
+    this.userService.getComparisons().subscribe((res) => {
+      if (res === null) {
+        this.compare = 0;
+      } else {
+        this.compare = res.length;
+      }
+    });
+    this.dataService.CompareChanel.subscribe((res) => {
+      if (res === true) {
+        this.compare += 1;
+      }
+      if (res === false) {
+        this.compare -= 1;
       }
     });
   }
