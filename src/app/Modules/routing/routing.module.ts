@@ -22,6 +22,8 @@ import {CompareComponent} from '../user/Components/compare/compare.component';
 import {CurrentComparationComponent} from '../user/Components/current-comparation/current-comparation.component';
 import {AdminMenuComponent} from '../admin/admin-menu/admin-menu.component';
 import {UsersComponent} from '../admin/users/users.component';
+import {AdminDataComponent} from '../admin/admin-data/admin-data.component';
+import {OrdersComponent} from '../admin/orders/orders.component';
 
 
 const routers: Routes = [
@@ -54,7 +56,9 @@ const routers: Routes = [
   {
     path: 'adminMenu',
     component: AdminMenuComponent, children: [
-      {path: 'users', component: UsersComponent}
+      {path: 'users', component: UsersComponent},
+      {path: 'personalData', component: AdminDataComponent},
+      {path: 'orders', component: OrdersComponent}
     ]
   }
 ];

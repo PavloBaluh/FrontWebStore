@@ -105,8 +105,12 @@ export class AppComponent implements OnInit {
         } else {
           // @ts-ignore
           if (user != null && user.authorities[0].authority === 'ROLE_ADMIN') {
-            user.personalData = new PersonalData(null, null, null, null, null);
+            if (this.user.personalData == null) {
+              this.user.personalData = new PersonalData(null, null, null, null, null);
+            }
             this.user = user;
+            this.isAnonimUser = false;
+            this.isAuthenticated = false;
             this.isAdmin = true;
           }
         }
@@ -129,10 +133,10 @@ export class AppComponent implements OnInit {
           this.user = userAfterLogin;
           if (this.user.personalData == null) {
             this.user.personalData = new PersonalData(null, null, null, null, null);
-            this.isAnonimUser = false;
-            this.isAuthenticated = false;
-            this.isAdmin = true;
           }
+          this.isAnonimUser = false;
+          this.isAuthenticated = false;
+          this.isAdmin = true;
         }
         // @ts-ignore
         if (userAfterLogin !== null && userAfterLogin.authorities[0].authority === 'ROLE_USER') {

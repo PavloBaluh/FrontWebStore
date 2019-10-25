@@ -80,7 +80,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   uploadFile(files, imginp) {
-    console.log(this.formObj.personalData.picture);
     const reader = new FileReader();
     reader.onloadend = () => {
       const img = reader.result;

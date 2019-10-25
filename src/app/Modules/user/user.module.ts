@@ -9,13 +9,13 @@ import {UserInfoComponent} from './Components/user-info/user-info-component';
 import {RoutingModule} from '../routing/routing.module';
 import {FormsModule} from '@angular/forms';
 import {WishesComponent} from './Components/wishes/wishes.component';
-import { CheckoutComponent } from './Components/checkout/checkout.component';
-import { InvoiceComponent } from './Components/invoice/invoice.component';
-import { PrintComponent } from './Components/print/print.component';
-import { OrderComponent } from './Components/order/order.component';
-import { OrderSumPipe } from './pipes/order-sum.pipe';
-import { CompareComponent } from './Components/compare/compare.component';
-import { CurrentComparationComponent } from './Components/current-comparation/current-comparation.component';
+import {CheckoutComponent} from './Components/checkout/checkout.component';
+import {InvoiceComponent} from './Components/invoice/invoice.component';
+import {PrintComponent} from './Components/print/print.component';
+import {OrderComponent} from './Components/order/order.component';
+import {OrderSumPipe} from './pipes/order-sum.pipe';
+import {CompareComponent} from './Components/compare/compare.component';
+import {CurrentComparationComponent} from './Components/current-comparation/current-comparation.component';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ConfirmRegistrationComponent,
@@ -25,7 +25,7 @@ import { CurrentComparationComponent } from './Components/current-comparation/cu
     RoutingModule,
     CommonModule
   ],
-  exports: [LoginComponent, AddToBasketModalComponent]
+  exports: [LoginComponent, AddToBasketModalComponent, UserInfoComponent, OrderSumPipe]
 })
 export class UserModule {
 }

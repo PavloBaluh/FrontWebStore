@@ -1,0 +1,46 @@
+<table *ngIf="!showMore" style="font-family: sans-serif; position: relative">
+  <tr>
+    <th width="10%"></th>
+    <th width="30%">Customer</th>
+    <th width="15%">Date</th>
+    <th width="15%">Status</th>
+    <th width="15%">Paid</th>
+    <th width="15%">Order Total</th>
+  </tr>
+  <tr *ngFor="let order of orders">
+    <td style="cursor: default;" class="cross"><i (click)="deleteOrder(order)" style="cursor: pointer">X</i></td>
+    <td (click)="moreInfo(order)"  style="cursor: pointer;"><img [src]="'../../assets/Users/' + order.user.personalData.picture">
+      <div class="text">{{order.user.username}}</div>
+    </td>
+    <td style="cursor: default">{{order.localDateTime|date:'y-MM-dd hh:mm:ss'}}</td>
+    <td style="cursor: default">
+      <select  (change)="changeOrderStatus(select,order.id)" #select style="width: 70%">
+        <option [selected]="order.orderStatus == 'checking'">checking</option>
+        <option [selected]="order.orderStatus == 'in_processing'">in processing</option>
+        <option [selected]="order.orderStatus == 'processed'">processed</option>
+      </select>
+    </td>
+    <td style="cursor: default"><i class="status">{{order.payed == false ? 'Not Yet' : 'Paid'}}</i></td>
+    <td style="cursor: default">{{order.orderProducts|orderSum}}</td>
+  </tr>
+</table>
+
+
+<table style="font-family: sans-serif; position: relative" *ngIf="showMore">
+  <tr >
+    <th width="40%">Product</th>
+    <th width="15%">Price</th>
+    <th width="15%">Quantity</th>
+    <th width="30%">Total</th>
+  </tr>
+  <tr *ngFor="let product of currentOrder.orderProducts ">
+    <td style="cursor: default;" ><img [src]="'../../assets/Goods/' + product.product.picture"><div class="text">{{product.product.title}}</div></td>
+    <td style="cursor: default" >{{product.product.price}}</td>
+    <td style="cursor: default" >{{product.quantity}}</td>
+    <td style="cursor: default" >{{product.quantity * product.product.price}}</td>
+  </tr>
+
+  <div (click)="showMore = false" class="back-arrow">
+    <img style="height: 30px; width: 60px; padding: 0" src="../../assets/Icons/back.png">
+  </div>
+</table>

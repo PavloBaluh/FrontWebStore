@@ -18,10 +18,14 @@ export class CurrentComparationComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.products = JSON.parse(params.Products);
-      this.products.forEach((prod) => {
-        prod.propertyValues.reverse();
-      });
+      console.log(params);
+      const tmp: Product[] = JSON.parse(params.Products);
+      // tmp.forEach(tmps => console.log(tmps.propertyValues));
+      // tmp.forEach((prod) => {
+      //   prod.propertyValues.reverse();
+      // });
+       this.products = tmp;
+      tmp.forEach(tmps => console.log(tmps.propertyValues));
       this.service.getAllProperties(params.sub).subscribe((res: Property[]) => {
         this.props = res;
       });

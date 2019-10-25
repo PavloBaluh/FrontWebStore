@@ -96,7 +96,7 @@ export class UserService {
 
   makeOrder(basket: Basket[], user: User, payType: string): Observable<Order> {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    const order = new Order(null, basket, 'checking', false, payType, null);
+    const order = new Order(null, basket, 'checking', false, payType, null, null);
     return this.http.post<Order>(this.apiUrl + 'makeOrder', order, {headers});
   }
 
@@ -121,6 +121,6 @@ export class UserService {
 
   deleteFromCompare(product: any) {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    return this.http.delete(this.apiUrl + 'deleteFromComparison/' +  product.id, {headers});
+    return this.http.delete(this.apiUrl + 'deleteFromComparison/' + product.id, {headers});
   }
 }

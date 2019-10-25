@@ -1,5 +1,6 @@
 import {Basket} from './Basket';
 import {EnumValue} from '@angular/compiler-cli/src/ngtsc/partial_evaluator';
+import {User} from './User';
 
 export class Order {
   constructor(
@@ -8,7 +9,8 @@ export class Order {
     public orderStatus: string,
     public payed: boolean,
     public payType: string,
-    public localDateTime: Date
+    public localDateTime: Date,
+    public user: User
   ) {
   }
 }

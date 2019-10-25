@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div (click)="compare(el)" class="button">Compare</div>
+    <div *ngIf="products.length >= 2" (click)="compare(el)" class="button">Compare</div>
   </div>
 </div>
 

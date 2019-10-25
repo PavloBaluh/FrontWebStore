@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 80%;
 }
 
 .product {
@@ -32,7 +33,7 @@
 }
 
 .characters {
-  width: 30%;
+  width: 20%;
   box-sizing: border-box;
   padding-top: 56px;
   border-right: 1px solid #eaeaea;
@@ -60,4 +61,5 @@ img {
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
+  overflow: hidden
 }

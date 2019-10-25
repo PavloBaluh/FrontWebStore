@@ -13,7 +13,7 @@ export class AdminMenuComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private  service: DataService) { }
 
   ngOnInit() {
-    this.router.navigate(['adminMenu/users']);
+    // this.router.navigate(['adminMenu/personalData']);
   }
   logout() {
     this.router.navigate(['']);
