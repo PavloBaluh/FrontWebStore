@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="tree">
+    <div class="head">Content Multilevel <img (click)="reload()"  class="title-icon"  src="assets/Icons/reload.png" >
+    <img (click)="addCategory()" class="title-icon" src="assets/Icons/add1.png">
+    </div>
+    <div *ngFor="let category of categories" class="col">
+      <div class="row-space">
+        <div class="row name">
+          <img class="ct-icons" src="assets/Icons/category.png">
+          <div (click)="editCategory(category)"  class="text">{{category.name}}</div>
+        </div>
+        <div class="icons">
+          <img (click)="editCategory(category)" class="ct-icons" src="assets/Icons/edit.png">
+          <img (click)="addSubCategory(category)" class="ct-icons" src="assets/Icons/add.png">
+          <img (click)="showModal(modal,category)"  class="ct-icons" src="assets/Icons/remove.png">
+          <div (click)="wrap(sub)" [textContent]=" sub.style.display === 'none'?'<':'∨'"
+               style=" padding-left: 5px; color: darkgray; font-weight: 600; font-size: 11px">
+          </div>
+        </div>
+      </div>
+      <div style="display: block" #sub>
+        <div *ngFor="let sub of category.subCategories" class="col">
+          <div class="row-space">
+            <div style="padding-left: 20px" class="row name">
+              <img class="ct-icons" src="assets/Icons/folder.png">
+              <div (click)="editSubCategory(sub)" class="text">{{sub.name}}</div>
+            </div>
+            <div class="icons">
+              <img (click)="editSubCategory(sub)" class="ct-icons" src="assets/Icons/edit.png">
+              <img (click)="addGroup(sub)" class="ct-icons" src="assets/Icons/add.png">
+              <img (click)="showModal(modal,sub)" class="ct-icons" src="assets/Icons/remove.png">
+              <div (click)="wrap(group)" [textContent]=" group.style.display === 'none'?'<':'∨'"
+                   style=" padding-left: 5px; color: darkgray; font-weight: 600; font-size: 11px">
+              </div>
+            </div>
+          </div>
+          <div style="display: block" #group>
+            <div *ngFor="let group of  sub.groups" class="col">
+              <div class="row-space">
+                <div style="padding-left: 40px" class="row name">
+                  <img class="ct-icons" src="assets/Icons/group.png">
+                  <div (click)="editGroupCategory(group)" class="text">{{group.name}}</div>
+                </div>
+                <div class="icons">
+                  <img (click)="editGroupCategory(group)" class="ct-icons" src="assets/Icons/edit.png">
+                  <img class="ct-icons" src="assets/Icons/add.png">
+                  <img (click)="showModal(modal,group)" class="ct-icons" src="assets/Icons/remove.png">
+                  <div (click)="wrap(product)" [textContent]=" product.style.display === 'none'?'<':'∨'"
+                       style=" padding-left: 5px; color: darkgray; font-weight: 600; font-size: 11px"></div>
+                </div>
+              </div>
+              <div style="display: block" #product>
+                <div *ngFor="let product of  group.products" class="col">
+                  <div class="row-space">
+                    <div style="padding-left: 60px" class="row name">
+                      <img class="ct-icons" src="assets/Icons/picture.png">
+                      <div (click)="showProduct(product)" class="text">{{product.title}}</div>
+                    </div>
+                    <div style="padding-left: 22px" class="icons">
+                      <img  class="ct-icons" src="assets/Icons/edit.png">
+                      <img (click)="showModal(modal,product)" class="ct-icons" src="assets/Icons/remove.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product">
+    <app-current-tree></app-current-tree>
+  </div>
+</div>
+<div #modal class="modal">
+  <div class="modal-content">
+    <h1 style="margin-top: 50px; font-size: 20px; font-family: sans-serif">Are you sure?</h1>
+    <div style="width: 60%" class="buttons">
+      <div style="width: 40%" (click)="remove(modal)" class="button">Yes</div>
+      <div style="width: 40%" (click)="modal.style.display = 'none'" class="button">No</div>
+    </div>
+  </div>
+</div>

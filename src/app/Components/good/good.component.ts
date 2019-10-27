@@ -17,7 +17,7 @@ import {SubCategory} from '../../Models/SubCategory';
 })
 export class GoodComponent implements OnInit {
   product: Product = new Product(0, '', '', 0, 0, '', 0, 0,
-    new Group('', ''), new SubCategory());
+    new Group(0, '', ''), new SubCategory());
   category = '';
   subCategory = '';
   group = '';

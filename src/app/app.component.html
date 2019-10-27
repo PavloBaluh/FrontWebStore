@@ -91,5 +91,5 @@
     <router-outlet></router-outlet>
   </main>
 </div>
-<div *ngIf="!router.url.startsWith('/userMenu')" class="footer"></div>
+<div *ngIf="!(router.url.startsWith('/userMenu')||router.url.startsWith('/adminMenu'))" class="footer"></div>
 

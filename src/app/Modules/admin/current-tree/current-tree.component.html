@@ -1,0 +1,25 @@
+<div class="container">
+  <div *ngIf="categoriesChange">
+    <div class="input">
+      <label class="label">{{type}} title:</label>
+      <input #text type="text" placeholder="{{placeholder}}">
+    </div>
+    <div class="buttons">
+      <div (click)="changeName(text)" class="button">submit</div>
+      <div (click)="modal.style.display = 'block'" class="button">remove</div>
+      <div (click)="isChangePassword = false" class="button">Add {{nextType}}</div>
+    </div>
+  </div>
+
+  <div class="product"></div>
+</div>
+
+<div #modal class="modal">
+  <div class="modal-content">
+    <h1 style="margin-top: 50px; font-size: 20px; font-family: sans-serif">Are you sure?</h1>
+    <div style="width: 60%" class="buttons">
+      <div style="width: 40%" (click)="remove(modal)" class="button">Yes</div>
+      <div style="width: 40%" (click)="modal.style.display = 'none'" class="button">No</div>
+    </div>
+  </div>
+</div>

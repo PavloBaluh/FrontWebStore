@@ -6,9 +6,11 @@ import { UsersComponent } from './users/users.component';
 import {UserModule} from '../user/user.module';
 import { AdminDataComponent } from './admin-data/admin-data.component';
 import { OrdersComponent } from './orders/orders.component';
+import { ProductTreeComponent } from './product-tree/product-tree.component';
+import { CurrentTreeComponent } from './current-tree/current-tree.component';
 
 @NgModule({
-  declarations: [AdminMenuComponent, UsersComponent, AdminDataComponent, OrdersComponent],
+  declarations: [AdminMenuComponent, UsersComponent, AdminDataComponent, OrdersComponent, ProductTreeComponent, CurrentTreeComponent],
   imports: [
     CommonModule,
     RoutingModule,

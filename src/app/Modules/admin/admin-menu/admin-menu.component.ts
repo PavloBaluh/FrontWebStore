@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../user/Services/user.service';
 import {Router} from '@angular/router';
 import {DataService} from '../../../Services/data.service';
@@ -10,11 +10,13 @@ import {DataService} from '../../../Services/data.service';
 })
 export class AdminMenuComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router, private  service: DataService) { }
+  constructor(private userService: UserService, private router: Router, private  service: DataService) {
+  }
 
   ngOnInit() {
     // this.router.navigate(['adminMenu/personalData']);
   }
+
   logout() {
     this.router.navigate(['']);
     localStorage.setItem('_key_', '');

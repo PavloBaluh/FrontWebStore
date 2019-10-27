@@ -13,9 +13,14 @@
         <img src="assets/Icons/shopping-cart-white.png">
         <div class="menu-selection">Orders</div>
       </div>
-      <div  routerLink="orders" class="inner-container">
+      <div  routerLink="productTree" class="inner-container">
         <img src="assets/Icons/list.png">
-        <div class="menu-selection">Content treeview</div>
+        <div  routerLink="productTree"   class="menu-selection">Content treeview</div>
+      </div>
+      <div class="sub">
+      <div routerLink="productTree"  class="sub-inner-container"><div class="circle"></div>Products</div>
+      <div  class="sub-inner-container"><div class="circle"></div>Advertisement</div>
+      <div  class="sub-inner-container"><div class="circle"></div>Properties</div>
       </div>
       <div (click)="logout()" class="inner-container">
         <img src="assets/Icons/logout.png">
