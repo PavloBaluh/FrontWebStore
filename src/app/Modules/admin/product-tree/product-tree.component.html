@@ -43,7 +43,7 @@
                 </div>
                 <div class="icons">
                   <img (click)="editGroupCategory(group)" class="ct-icons" src="assets/Icons/edit.png">
-                  <img class="ct-icons" src="assets/Icons/add.png">
+                  <img (click)="addProduct(group)" class="ct-icons" src="assets/Icons/add.png">
                   <img (click)="showModal(modal,group)" class="ct-icons" src="assets/Icons/remove.png">
                   <div (click)="wrap(product)" [textContent]=" product.style.display === 'none'?'<':'∨'"
                        style=" padding-left: 5px; color: darkgray; font-weight: 600; font-size: 11px"></div>
@@ -57,7 +57,7 @@
                       <div (click)="showProduct(product)" class="text">{{product.title}}</div>
                     </div>
                     <div style="padding-left: 22px" class="icons">
-                      <img  class="ct-icons" src="assets/Icons/edit.png">
+                      <img (click)="showProduct(product)"  class="ct-icons" src="assets/Icons/edit.png">
                       <img (click)="showModal(modal,product)" class="ct-icons" src="assets/Icons/remove.png">
                     </div>
                   </div>

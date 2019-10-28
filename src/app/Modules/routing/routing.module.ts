@@ -7,7 +7,6 @@ import {GoodsComponent} from '../../Components/goods/goods.component';
 import {GoodsItemsComponent} from '../../Components/goods-items/goods-items.component';
 import {LoginComponent} from '../user/Components/login/login.component';
 import {RegisterComponent} from '../user/Components/register/register.component';
-import * as path from 'path';
 import {ConfirmRegistrationComponent} from '../user/Components/confirm-registration/confirm-registration.component';
 import {UserMenuComponent} from '../user/Components/user-menu/user-menu.component';
 import {UserInfoComponent} from '../user/Components/user-info/user-info-component';

@@ -5,6 +5,8 @@ import {Group} from '../../../Models/Group';
 import {SubCategory} from '../../../Models/SubCategory';
 import {AdminService} from '../Services/admin.service';
 import {Product} from '../../../Models/Product';
+import {PropertyValue} from '../../../Models/PropertyValue';
+import {MainService} from '../../../Services/main.service';
 
 @Component({
   selector: 'app-current-tree',
@@ -22,8 +24,27 @@ export class CurrentTreeComponent implements OnInit {
   subCategory: SubCategory;
   group: Group;
 
+  formObj = {
+    id: 0,
+    title: '',
+    price: 0,
+    availableNumber: 0,
+    category: '',
+    subCategory: '',
+    group: '',
+    description: '',
+    properties: [],
+    warrantyMonths: 0,
+    picture: ''
+  };
+  categories: Category[];
+  subCategories: SubCategory[];
+  groups: Group[];
+  properties: [];
+  IsEdited = false;
 
-  constructor(private adminDataService: AdminDataService, private adminService: AdminService) {
+
+  constructor(private adminDataService: AdminDataService, private adminService: AdminService, private service: MainService) {
   }
 
   ngOnInit() {
@@ -33,6 +54,7 @@ export class CurrentTreeComponent implements OnInit {
       this.nextType = 'SubCategory';
       this.placeholder = res.name;
       this.categoriesChange = true;
+      this.isProduct = false;
     });
     this.adminDataService.treeSubChanel.subscribe((res: SubCategory) => {
       this.subCategory = res;
@@ -40,6 +62,7 @@ export class CurrentTreeComponent implements OnInit {
       this.nextType = 'Group';
       this.placeholder = res.name;
       this.categoriesChange = true;
+      this.isProduct = false;
     });
     this.adminDataService.treeGroupChanel.subscribe((res: Group) => {
       this.group = res;
@@ -47,14 +70,42 @@ export class CurrentTreeComponent implements OnInit {
       this.nextType = 'Product';
       this.placeholder = res.name;
       this.categoriesChange = true;
+      this.isProduct = false;
     });
 
     this.adminDataService.showchanel.subscribe((res: boolean) => {
       this.categoriesChange = res;
     });
 
-    this.adminDataService.productChanel.subscribe((product) => {
-      console.log(product);
+    this.adminDataService.productChanel.subscribe((product: Product) => {
+      if (product.id !== this.formObj.id) {
+        // @ts-ignore
+        this.formObj = product;
+        this.formObj.properties = [];
+        product.propertyValues.forEach((prop) => {
+          this.formObj.properties.push(prop.value);
+        });
+        this.service.getHierarchy(product.group).subscribe((hier) => {
+          this.formObj.category = hier[2];
+          this.formObj.subCategory = hier[1];
+          this.formObj.group = hier[0];
+          this.service.getAllCategories().subscribe((res: Category[]) => {
+            this.categories = res;
+            res.forEach((category) => {
+              if (category.name === this.formObj.category) {
+                this.subCategories = category.subCategories;
+                this.subCategories.forEach((sub) => {
+                  if (sub.name === this.formObj.subCategory) {
+                    this.groups = sub.groups;
+                  }
+                });
+              }
+            });
+          });
+        });
+      }
+      this.categoriesChange = false;
+      this.isProduct = true;
     });
   }
 
@@ -107,5 +158,74 @@ export class CurrentTreeComponent implements OnInit {
         modale.style.display = 'none';
       });
     }
+  }
+
+  uploadFile(files, imginp) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const img = reader.result;
+      imginp.src = img;
+    };
+    reader.readAsDataURL(files.item(0));
+    this.formObj.picture = files.item(0);
+  }
+
+  changeCategory(val) {
+    this.formObj.category = val;
+    this.categories.forEach((ct) => {
+      if (ct.name === this.formObj.category) {
+        this.subCategories = ct.subCategories;
+        this.formObj.subCategory = this.subCategories[0].name;
+        ct.subCategories.forEach((sub) => {
+          if (sub.name === this.formObj.subCategory) {
+            this.groups = sub.groups;
+            this.formObj.group = this.groups[0].name;
+          }
+        });
+      }
+    });
+  }
+
+  changeSubCategory(value: string) {
+    this.formObj.subCategory = value;
+    this.subCategories.forEach((sub) => {
+      if (sub.name === value) {
+        this.groups = sub.groups;
+        this.formObj.group = sub.groups[0].name;
+      }
+    });
+
+  }
+
+  changeGroup(value: string) {
+    this.formObj.group = value;
+  }
+
+  change() {
+    const product: Product = new Product(0, '', '', 0, 0, '', 0, 0, new Group(), new SubCategory());
+    product.id = this.formObj.id;
+    product.title = this.formObj.title;
+    product.price = this.formObj.price;
+    product.availableNumber = this.formObj.availableNumber;
+    product.warrantyMonths = this.formObj.warrantyMonths;
+    product.description = this.formObj.description;
+    product.picture = this.formObj.picture;
+    this.categories.forEach((category) => {
+      if (category.name === this.formObj.category) {
+        category.subCategories.forEach((sub: SubCategory) => {
+          if (sub.name === this.formObj.subCategory) {
+            sub.groups.forEach((group) => {
+              if (group.name === this.formObj.group) {
+                product.group = group;
+              }
+            });
+          }
+        });
+      }
+    });
+    this.adminService.changeProductInfo(product, this.formObj.properties).subscribe((res) => {
+      this.IsEdited = true;
+      setTimeout(() => this.IsEdited = false, 2000);
+    });
   }
 }

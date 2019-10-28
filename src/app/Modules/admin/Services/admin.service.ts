@@ -98,4 +98,30 @@ export class AdminService {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.post(this.apiUrl + '/addGroup/' + group.name, sub, {headers});
   }
+
+  changeProductInfo(product: Product, properties) {
+    const params = new FormData();
+    params.append('id', product.id.toString());
+    params.append('title', product.title);
+    params.append('description', product.description);
+    params.append('warrantyMonths', product.warrantyMonths.toString());
+    params.append('availableNumber', product.availableNumber.toString());
+    params.append('price', product.price.toString());
+    params.append('groupId', product.group.id.toString());
+    params.append('properties', properties);
+    // @ts-ignore
+    if (product.picture != null && product.picture.name) {
+      // @ts-ignore
+      params.append('productPicture', product.picture, product.picture.name);
+    } else {
+      params.append('oldPicture', product.picture);
+    }
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.post(this.apiUrl + '/changeProductInfo', params, {headers});
+  }
+
+  addProduct(group: Group): Observable<Product> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Product>(this.apiUrl + '/addProduct/' + group.id, {headers});
+  }
 }

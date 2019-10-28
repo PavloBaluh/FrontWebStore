@@ -147,6 +147,21 @@ export class ProductTreeComponent implements OnInit {
     });
   }
 
+  addProduct(group: Group) {
+    this.adminService.addProduct(group).subscribe((product) => {
+      this.categories.forEach((category) => {
+        category.subCategories.forEach((sub: SubCategory) => {
+          sub.groups.forEach((groups) => {
+            if (groups.id === product.group.id) {
+              groups.products.push(product);
+            }
+          });
+        });
+      });
+      this.showProduct(product);
+    });
+  }
+
   showProduct(product: Product) {
     this.adminDataService.productChanel.next(product);
   }

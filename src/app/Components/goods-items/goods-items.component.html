@@ -11,15 +11,15 @@
       ${{el.price}}
     </div>
     <div class="selection">
-      <div (click)="addToCard(el,modalLogin,modalBuy,$event)" class="add">
-        <img src="/assets/Icons/shopping-card-white.png" alt="01">
+      <div [style.pointer-events]="disable?'none':'default'" (click)="addToCard(el,modalLogin,modalBuy,$event)" class="add">
+        <img  src="/assets/Icons/shopping-card-white.png" alt="01">
         <div class="text-cart">Add to card</div>
       </div>
       <div class="img">
-        <img (click)="addToWishes(el,modalLogin,$event)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
+        <img [style.pointer-events]="disable?'none':'default'" (click)="addToWishes(el,modalLogin,$event)" class="hoverImg" src="/assets/Icons/like%20(1).png" alt="02">
       </div>
       <div class="img">
-        <img (click)="addToCompare(el,modalLogin,modalBuy,$event)" class="hoverImg"
+        <img [style.pointer-events]="disable?'none':'default'" (click)="addToCompare(el,modalLogin,modalBuy,$event)" class="hoverImg"
              src="/assets/Icons/weight-balance.png" alt="03">
       </div>
     </div>

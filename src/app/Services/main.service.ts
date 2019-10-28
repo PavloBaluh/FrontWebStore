@@ -20,7 +20,13 @@ export class MainService {
 
 
   getHierarchy(group) {
-    return this.http.get(this.api + '/getHierarchy/' + group);
+    let groupName = '';
+    if (group.hasOwnProperty('name')) {
+      groupName = group.name;
+    } else {
+      groupName = group;
+    }
+    return this.http.get(this.api + '/getHierarchy/' + groupName);
   }
 
   getAllCategories(): Observable<Category[]> {
@@ -75,6 +81,7 @@ export class MainService {
   getMostPopularProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.api + '/getMostPopular/');
   }
+
   getMostLatestProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.api + '/getLatest/');
   }

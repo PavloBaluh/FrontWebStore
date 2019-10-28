@@ -41,7 +41,7 @@
             <div (click)="showCart($event)" class="view">View all carts</div>
           </div>
         </div>
-        <div [routerLink]="isAuthenticated?'userMenu/userInfo':'adminMenu'" class="profile">
+        <div [routerLink]="isAuthenticated?'userMenu/userInfo':'adminMenu/personalData'" class="profile">
           <img class="user-icon" [src]="user.personalData.picture == null?'../assets/Users/man_user.png':'../assets/Users/' + user.personalData.picture">
           <div style="font-weight: 600" class="text">{{user.username}}</div>
         </div>

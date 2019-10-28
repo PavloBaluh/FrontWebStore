@@ -22,12 +22,20 @@ export class GoodComponent implements OnInit {
   subCategory = '';
   group = '';
   properties: Property[] = [];
+  disable = false;
 
   constructor(private acticatedRoute: ActivatedRoute, private service: MainService, private dataService: DataService, private userService: UserService,
               private router: Router) {
   }
 
   ngOnInit() {
+    this.userService.getAuthentication().subscribe((res) => {
+      // @ts-ignore
+      if (res.authorities[0].authority === 'ROLE_ADMIN') {
+        this.disable = true;
+      }
+    });
+
     this.acticatedRoute.params.subscribe((res) => {
       if (res.id > 0) {
         this.service.getProductById(res.id).subscribe((map: object) => {

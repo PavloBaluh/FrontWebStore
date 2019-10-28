@@ -17,6 +17,7 @@ export class GoodsItemsComponent implements OnInit {
   pages = [];
   currentPage = 1;
   isProductsPresent = true;
+  disable = false;
 
   constructor(private dataService:
                 DataService, private service: MainService, private activatedRoute: ActivatedRoute,
@@ -24,6 +25,12 @@ export class GoodsItemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAuthentication().subscribe((res) => {
+      // @ts-ignore
+      if (res.authorities[0].authority === 'ROLE_ADMIN') {
+        this.disable = true;
+      }
+    });
     this.activatedRoute.queryParams.subscribe((res) => {
       if (res[3] > 4) {
         this.currentPage = 1;

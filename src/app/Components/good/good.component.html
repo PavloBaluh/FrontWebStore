@@ -18,9 +18,9 @@
     <div class="text">Group: <b [routerLink]=" '/' + group + '/goods/sort'" style="color:rgb(28, 99, 96);">{{group}}</b>
     </div>
     <div class="buttons">
-      <div (click)="addToCart(modalBuy,modalLogin)" class="button">add to cart</div>
-      <div (click)="addToWishes(modalLogin)" class="button">wishlist</div>
-      <div (click)="addToCompares(modalLogin)" class="button">compare</div>
+      <div [style.pointer-events]="disable?'none':'default'" (click)="addToCart(modalBuy,modalLogin)" class="button">add to cart</div>
+      <div [style.pointer-events]="disable?'none':'default'" (click)="addToWishes(modalLogin)" class="button">wishlist</div>
+      <div [style.pointer-events]="disable?'none':'default'" (click)="addToCompares(modalLogin)" class="button">compare</div>
     </div>
   </div>
 </div>

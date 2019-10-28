@@ -8,13 +8,15 @@ import { AdminDataComponent } from './admin-data/admin-data.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductTreeComponent } from './product-tree/product-tree.component';
 import { CurrentTreeComponent } from './current-tree/current-tree.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AdminMenuComponent, UsersComponent, AdminDataComponent, OrdersComponent, ProductTreeComponent, CurrentTreeComponent],
   imports: [
     CommonModule,
     RoutingModule,
-    UserModule
+    UserModule,
+    FormsModule,
   ]
 })
 export class AdminModule { }

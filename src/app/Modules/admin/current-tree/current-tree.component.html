@@ -7,11 +7,72 @@
     <div class="buttons">
       <div (click)="changeName(text)" class="button">submit</div>
       <div (click)="modal.style.display = 'block'" class="button">remove</div>
-      <div (click)="isChangePassword = false" class="button">Add {{nextType}}</div>
+      <div class="button">Add {{nextType}}</div>
     </div>
   </div>
 
-  <div class="product"></div>
+  <div *ngIf="isProduct" class="product">
+    <div class="img">
+      <img  [src]="formObj.picture === ''||formObj.picture == null?'assets/Icons/picture.png':'assets/Goods/' + formObj.picture" #img>
+      <label for="upload" [textContent]="'Upload Image'" class="button02">
+      </label>
+      <input (change)="uploadFile($event.target.files, img)" id="upload" type="file" style="display: none">
+    </div>
+    <div class="info">
+      <div *ngIf="IsEdited" class="alert">Edited !!!</div>
+      <form ngForm>
+        <div class="form-entry">
+          <div class="row-name">Product title:</div>
+          <input [(ngModel)]="formObj.title" name="title">
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Price:</div>
+          <input [(ngModel)]="formObj.price" name="price">
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Available number:</div>
+          <input type="number" [(ngModel)]="formObj.availableNumber" name="availableNumber">
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Category:</div>
+          <select #select01 (change)="changeCategory(select01.value)" name="category">
+            <option [selected]="category.name === formObj.category"
+                    *ngFor="let category of categories">{{category.name}}</option>
+          </select>
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Subcategory:</div>
+          <select #select02 (change)="changeSubCategory(select02.value)" name="category">
+            <option [selected]=" subCtg.name === formObj.subCategory"
+                    *ngFor="let subCtg of subCategories">{{subCtg.name}}</option>
+          </select>
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Group:</div>
+          <select #select03 (change)="changeGroup(select03.value)" name="category">
+            <option [selected]=" group.name === formObj.group" *ngFor="let group of groups">{{group.name}}</option>
+          </select>
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Description:</div>
+          <input style="height: 60px" [(ngModel)]="formObj.description" name="description">
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Property class:</div>
+          <textarea [(ngModel)]="formObj.properties" style="width: 70%; padding-left: 5px; box-sizing: border-box; height: 90px" name="propertyValues">
+            </textarea>
+        </div>
+        <div class="form-entry">
+          <div class="row-name">Warranty months</div>
+          <input type="number" [(ngModel)]="formObj.warrantyMonths" name="warrantyMonths">
+        </div>
+      </form>
+      <div class="buttons02">
+        <div (click)="change()" class="button">SUBMIT</div>
+        <div (click)="isProduct = false" class="button">CANCEL</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div #modal class="modal">
