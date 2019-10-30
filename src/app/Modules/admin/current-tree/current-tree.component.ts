@@ -5,7 +5,6 @@ import {Group} from '../../../Models/Group';
 import {SubCategory} from '../../../Models/SubCategory';
 import {AdminService} from '../Services/admin.service';
 import {Product} from '../../../Models/Product';
-import {PropertyValue} from '../../../Models/PropertyValue';
 import {MainService} from '../../../Services/main.service';
 
 @Component({
@@ -23,6 +22,7 @@ export class CurrentTreeComponent implements OnInit {
   category: Category;
   subCategory: SubCategory;
   group: Group;
+  newPicture = '';
 
   formObj = {
     id: 0,
@@ -121,7 +121,7 @@ export class CurrentTreeComponent implements OnInit {
         });
       }
       if (this.type === 'Subcategory') {
-        this.adminService.renameSubCategory(this.subCategory, value.value).subscribe((res) => {
+        this.adminService.editSubCategory(this.subCategory, value.value, this.newPicture).subscribe((res) => {
           if (res === true) {
             this.placeholder = value.value;
             value.value = '';
@@ -129,7 +129,8 @@ export class CurrentTreeComponent implements OnInit {
         });
       }
       if (this.type === 'Group') {
-        this.adminService.renameGroup(this.group, value.value).subscribe((res) => {
+        console.log(this.newPicture);
+        this.adminService.editGroup(this.group, value.value, this.newPicture).subscribe((res) => {
           if (res === true) {
             this.placeholder = value.value;
             value.value = '';
@@ -227,5 +228,21 @@ export class CurrentTreeComponent implements OnInit {
       this.IsEdited = true;
       setTimeout(() => this.IsEdited = false, 2000);
     });
+  }
+
+  uploadFileHier(files: any) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const img = reader.result;
+      files.src = img;
+    };
+    reader.readAsDataURL(files.item(0));
+    if (this.type === 'Subcategory') {
+      this.subCategory.picture = files.item(0).name;
+    }
+    if (this.type === 'Group') {
+      this.group.picture = files.item(0).name;
+    }
+    this.newPicture = files.item(0);
   }
 }

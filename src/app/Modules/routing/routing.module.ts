@@ -24,6 +24,7 @@ import {UsersComponent} from '../admin/users/users.component';
 import {AdminDataComponent} from '../admin/admin-data/admin-data.component';
 import {OrdersComponent} from '../admin/orders/orders.component';
 import {ProductTreeComponent} from '../admin/product-tree/product-tree.component';
+import {ProperiesTreeComponent} from '../admin/properies-tree/properies-tree.component';
 
 
 const routers: Routes = [
@@ -59,7 +60,8 @@ const routers: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'personalData', component: AdminDataComponent},
       {path: 'orders', component: OrdersComponent},
-      {path: 'productTree', component: ProductTreeComponent}
+      {path: 'productTree', component: ProductTreeComponent},
+      {path: 'propertiesTree', component: ProperiesTreeComponent}
     ]
   }
 ];

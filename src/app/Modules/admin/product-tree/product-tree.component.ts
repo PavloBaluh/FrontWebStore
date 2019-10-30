@@ -45,7 +45,6 @@ export class ProductTreeComponent implements OnInit {
   }
 
   wrap(sub: HTMLDivElement) {
-    console.log(sub.style.display);
     if (sub.style.display === 'block') {
       sub.style.display = 'none';
     } else {

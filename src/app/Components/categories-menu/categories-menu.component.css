@@ -18,6 +18,8 @@
 }
 
 img{
+  height: 150px;
+  width: 120px;
   cursor: pointer;
   border-right: 25px white solid;
   border-left: 25px white solid;

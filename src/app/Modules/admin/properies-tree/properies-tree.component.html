@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="tree">
+    <div class="head">Content Multilevel <img (click)="reload()" class="title-icon" src="assets/Icons/reload.png">
+      <img (click)="addProperty()" class="title-icon" src="assets/Icons/add1.png">
+    </div>
+    <div *ngFor="let property of properties" class="col">
+      <div class="row-space">
+        <div class="row name">
+          <img class="ct-icons" src="assets/Icons/category.png">
+          <div (click)="editProperty(property)" class="text">{{property.propertyName}}</div>
+        </div>
+        <div class="icons">
+          <img (click)="editProperty(property)" class="ct-icons" src="assets/Icons/edit.png">
+          <img (click)="addPropertyValue(property)" class="ct-icons" src="assets/Icons/add.png">
+          <img (click)="showModal(modal,property)" class="ct-icons" src="assets/Icons/remove.png">
+          <div (click)="wrap(value)" [textContent]=" value.style.display === 'none'?'<':'∨'"
+               style=" padding-left: 5px; color: darkgray; font-weight: 600; font-size: 11px">
+          </div>
+        </div>
+      </div>
+      <div style="display: block" #value>
+        <div *ngFor="let value of property.values" class="col">
+          <div class="row-space">
+            <div style="padding-left: 20px" class="row name">
+              <img class="ct-icons" src="assets/Icons/folder.png">
+              <div (click)="editValue(value)" class="text">{{value.value}}</div>
+            </div>
+            <div class="icons">
+              <img (click)="editValue(value)" class="ct-icons" src="assets/Icons/edit.png">
+              <img (click)="showModal(modal,value)" class="ct-icons" src="assets/Icons/remove.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="selected" *ngIf="propertySelected||propertyValueSelected">
+    <div class="input">
+      <label class="label">{{propertyValueSelected?'Property Value ':'Property '}} title:</label>
+      <input #text type="text" placeholder="{{placeHolder}}">
+    </div>
+    <div class="buttons">
+      <div (click)="changeName(text)" class="button">submit</div>
+      <div (click)="modal.style.display = 'block'" class="button">remove</div>
+      <div (click)="addPropertyValue(currentProperty)" *ngIf="propertySelected" class="button">Add Property Value</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div #modal class="modal">
+  <div class="modal-content">
+    <h1 style="margin-top: 50px; font-size: 20px; font-family: sans-serif">Are you sure?</h1>
+    <div style="width: 60%" class="buttons">
+      <div style="width: 40%" (click)="remove(modal)" class="button">Yes</div>
+      <div style="width: 40%" (click)="modal.style.display = 'none'" class="button">No</div>
+    </div>
+  </div>
+</div>

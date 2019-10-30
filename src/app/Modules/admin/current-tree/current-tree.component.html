@@ -4,6 +4,14 @@
       <label class="label">{{type}} title:</label>
       <input #text type="text" placeholder="{{placeholder}}">
     </div>
+    <div *ngIf="type === 'Subcategory'|| type === 'Group'" style="margin-top: 40px" class="input">
+      <label class="label">{{type}} picture:</label>
+      <div style="width: 70%">
+        <input style="width: 80%" readonly type="text" value="{{type === 'Subcategory'?subCategory.picture:group.picture}}">
+        <input (change)="uploadFileHier($event.target.files)" id="file" #file type="file" style="display: none">
+        <label for="file" style="width: 20%; padding-left: 20px; cursor: pointer">Change</label>
+      </div>
+    </div>
     <div class="buttons">
       <div (click)="changeName(text)" class="button">submit</div>
       <div (click)="modal.style.display = 'block'" class="button">remove</div>
@@ -13,7 +21,9 @@
 
   <div *ngIf="isProduct" class="product">
     <div class="img">
-      <img  [src]="formObj.picture === ''||formObj.picture == null?'assets/Icons/picture.png':'assets/Goods/' + formObj.picture" #img>
+      <img
+        [src]="formObj.picture === ''||formObj.picture == null?'assets/Icons/picture.png':'assets/Goods/' + formObj.picture"
+        #img>
       <label for="upload" [textContent]="'Upload Image'" class="button02">
       </label>
       <input (change)="uploadFile($event.target.files, img)" id="upload" type="file" style="display: none">
@@ -59,7 +69,8 @@
         </div>
         <div class="form-entry">
           <div class="row-name">Property class:</div>
-          <textarea [(ngModel)]="formObj.properties" style="width: 70%; padding-left: 5px; box-sizing: border-box; height: 90px" name="propertyValues">
+          <textarea [(ngModel)]="formObj.properties"
+                    style="width: 70%; padding-left: 5px; box-sizing: border-box; height: 90px" name="propertyValues">
             </textarea>
         </div>
         <div class="form-entry">

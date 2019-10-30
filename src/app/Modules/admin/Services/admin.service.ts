@@ -6,6 +6,8 @@ import {Product} from '../../../Models/Product';
 import {Category} from '../../../Models/Category';
 import {SubCategory} from '../../../Models/SubCategory';
 import {Group} from '../../../Models/Group';
+import {Property} from '../../../Models/Property';
+import {PropertyValue} from '../../../Models/PropertyValue';
 
 @Injectable({
   providedIn: 'root'
@@ -54,14 +56,24 @@ export class AdminService {
     return this.http.get(this.apiUrl + '/renameCategory/' + (value + ',' + category.id), {headers});
   }
 
-  renameSubCategory(subCategory: SubCategory, value: string) {
+  editSubCategory(subCategory: SubCategory, value: string, picture) {
+    const params = new FormData();
+    if (picture || picture !== '') {
+      console.log(picture.picture);
+      params.append('picture', picture, picture.name);
+    }
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    return this.http.get(this.apiUrl + '/renameSubCategory/' + (value + ',' + subCategory.id), {headers});
+    return this.http.post(this.apiUrl + '/editSubCategory/' + (value + ',' + subCategory.id), params, {headers});
   }
 
-  renameGroup(group: Group, value: string) {
+  editGroup(group: Group, value: string, picture) {
+    const params = new FormData();
+    if (picture || picture !== '') {
+      console.log(picture);
+      params.append('picture', picture, picture.name);
+    }
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
-    return this.http.get(this.apiUrl + '/renameGroup/' + (value + ',' + group.id), {headers});
+    return this.http.post(this.apiUrl + '/editGroup/' + (value + ',' + group.id), params, {headers});
   }
 
   removeCategory(category: Category) {
@@ -80,6 +92,7 @@ export class AdminService {
   }
 
   removeProduct(product: Product) {
+    console.log(product.id);
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.delete(this.apiUrl + '/deleteProduct/' + product.id, {headers});
   }
@@ -123,5 +136,40 @@ export class AdminService {
   addProduct(group: Group): Observable<Product> {
     const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
     return this.http.get<Product>(this.apiUrl + '/addProduct/' + group.id, {headers});
+  }
+
+  getAllProperties(): Observable<Property[]> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Property[]>(this.apiUrl + '/getAllProperties', {headers});
+  }
+
+  addProperty(): Observable<Property> {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Property>(this.apiUrl + '/addProperty', {headers});
+  }
+
+  renameProperty(currentProperty: Property, value: string) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Property>(this.apiUrl + '/renameProperty/' + value + ',' + currentProperty.id, {headers});
+  }
+
+  removeProperty(propertySelected: Property) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.delete(this.apiUrl + '/deleteProperty/' + propertySelected.id, {headers});
+  }
+
+  addPropertyValue(property: Property) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get(this.apiUrl + '/addPropertyValue/' + property.id, {headers});
+  }
+
+  renamePropertyValue(currentProperty: PropertyValue, value: string) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.get<Property>(this.apiUrl + '/renamePropertyValue/' + value + ',' + currentProperty.id, {headers});
+  }
+
+  removePropertyValue(currrentPropertyValue: PropertyValue) {
+    const headers = this.headers.append('Authorization', localStorage.getItem('_key_'));
+    return this.http.delete(this.apiUrl + '/deletePropertyValue/' + currrentPropertyValue.id, {headers});
   }
 }

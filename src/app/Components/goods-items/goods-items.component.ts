@@ -37,6 +37,7 @@ export class GoodsItemsComponent implements OnInit {
       }
       this.service.getAllSortedGoods(res[0], res[1], res[2], res[3], res[4], this.group, res[5], this.currentPage - 1)
         .subscribe((sortedGoods) => {
+          console.log(sortedGoods);
           this.goodsToShow = sortedGoods;
           if (this.goodsToShow.length === 0) {
             this.isProductsPresent = false;

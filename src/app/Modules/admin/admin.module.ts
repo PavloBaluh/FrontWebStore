@@ -9,9 +9,10 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductTreeComponent } from './product-tree/product-tree.component';
 import { CurrentTreeComponent } from './current-tree/current-tree.component';
 import {FormsModule} from '@angular/forms';
+import { ProperiesTreeComponent } from './properies-tree/properies-tree.component';
 
 @NgModule({
-  declarations: [AdminMenuComponent, UsersComponent, AdminDataComponent, OrdersComponent, ProductTreeComponent, CurrentTreeComponent],
+  declarations: [AdminMenuComponent, UsersComponent, AdminDataComponent, OrdersComponent, ProductTreeComponent, CurrentTreeComponent, ProperiesTreeComponent],
   imports: [
     CommonModule,
     RoutingModule,

@@ -15,6 +15,7 @@ export class CategoriesMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.elementsToShowMain);
   }
 
   show(el) {

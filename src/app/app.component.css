@@ -144,12 +144,12 @@ button {
   display: none;
   background-color: white;
   position: absolute;
-  bottom: -150px;
   left: -1px;
   width: 200px;
   color: rgb(28, 99, 96);
   border: 1px solid;
   border-radius: 0 5px 5px 5px;
+  margin-top: 20px;
 }
 
 li {
